@@ -1,56 +1,42 @@
 /* ===========================================================================
-   "Linear, est. 2004" -- styles.css
-   Deadpan reconstruction of the ICQ 2004 portal with Linear content.
-   Order: design tokens -> base/reset -> layout -> components (DOM order).
-   System fonts only. No web fonts. No frameworks. No !important.
+   "Linear.com, est. 2000" -- styles.css
+   Deadpan full replicant of the ICQ.com ~2000 portal homepage, rebuilt with
+   Linear content. Static HTML/CSS/JS, no build step, no dependencies.
+   Order: tokens -> base/reset -> layout -> components (DOM order).
+   System fonts only. No !important.
    =========================================================================== */
 
 /* ---------------------------------------------------------------------------
-   1. DESIGN TOKENS (sampled from the ICQ 2004 reference)
+   1. DESIGN TOKENS (sampled from the ICQ.com 2000 reference)
    --------------------------------------------------------------------------- */
 :root {
-  /* Surface & background */
-  --page-cream: #FFFFE5;
-  --page-stripe: #FBFBCB;
-  --box-white: #FFFFFF;
+  /* Brand orange (mastheads, sub-nav, footer, "Search the Web" bar) */
+  --orange: #F7941D;
+  --orange-deep: #E07B12;
+  --orange-pale: #FDE9CC;
 
-  /* Purple system */
-  --box-purple: #5E2C8C;
-  --box-purple-deep: #552C82;
+  /* Lime-green section headers */
+  --green-head: #A7C81C;
+  --green-head-edge: #7E9A12;
+  --green-bright: #6FB52B;   /* "Get Linear for Free" oval */
+  --green-bright-2: #3F8C12;
 
-  /* Lavender */
-  --lavender: #CCCCFF;
-  --lavender-grey: #C4C8DA;
-  --lavender-border: #9B97C4;
-
-  /* Navigation */
-  --nav-olive: #BFBF58;
-
-  /* Teal (bulletin headers) */
-  --teal-head: #90ACA5;
-
-  /* Tab / folder boxes */
-  --tab-khaki: #B1B295;
-  --tab-khaki-light: #E0D7CA;
-  --promo-panel-green: #CFD6C1;
+  /* Surfaces */
+  --white: #FFFFFF;
+  --cream: #FFFFCC;          /* "What's Hot In" box, highlight panels */
+  --rule: #D9D9C0;           /* thin column separators / hairlines */
 
   /* Text */
-  --text-dark: #3A2541;
-  --text-warm: #5D5465;
-  --text-purple: #5E2C8C;
+  --ink: #222222;
+  --ink-soft: #4A4A4A;
 
   /* Links & accents */
   --link-blue: #0000CC;
-  --link-orange: #CC6633;
-  --accent-red: #CC0000;
+  --link-red: #CC0000;
+  --link-orange: #CC6600;
+  --hot-red: #D40000;
 
-  /* Orange download button */
-  --orange-top: #E8821C;
-  --orange-bottom: #C96A12;
-  --orange-highlight: #F4A94E;
-  --orange-shadow: #9E5210;
-
-  /* Period bevel greys */
+  /* Bevels (period grey buttons) */
   --bevel-face: #D4D0C8;
   --bevel-light: #FFFFFF;
   --bevel-dark: #808080;
@@ -60,516 +46,323 @@
    2. BASE / RESET
    --------------------------------------------------------------------------- */
 * { box-sizing: border-box; }
-
 html, body { margin: 0; padding: 0; }
-
 body {
-  /* Subtle alternating horizontal band behind the whole page (cream/stripe). */
-  background-color: var(--page-cream);
-  background-image: repeating-linear-gradient(
-    to bottom,
-    var(--page-cream) 0, var(--page-cream) 26px,
-    var(--page-stripe) 26px, var(--page-stripe) 52px
-  );
-  color: var(--text-dark);
+  background: #FFFFFF;
+  color: var(--ink);
   font-family: Verdana, Geneva, Tahoma, Arial, sans-serif;
   font-size: 11px;
-  line-height: 1.35;
+  line-height: 1.3;
 }
-
-h1, h2, h3, p, ul { margin: 0; padding: 0; }
+h1, h2, h3, h4, p, ul, dl, dd, dt { margin: 0; padding: 0; }
 ul { list-style: none; }
-
 a { color: var(--link-blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
+img, svg { border: 0; vertical-align: middle; }
 
-img { border: 0; }
-
-/* Fixed 770px canvas, centered. Non-responsive by design; the viewport meta
-   scales the whole canvas down to fit narrow screens (no reflow). */
+/* Fixed centered canvas; viewport meta scales it down on narrow screens. */
 .page {
-  width: 770px;
+  width: 830px;
   margin: 0 auto;
-  background: var(--page-cream);
+  background: var(--white);
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
 }
 
-.diamond { color: inherit; font-size: 0.8em; vertical-align: 1px; }
-.accent-red { color: var(--accent-red); }
-.link-orange { color: var(--link-orange); }
-
-/* Shared 2004 grey bevel button (Search, Go). */
+/* Period grey bevel button (Search, Go, Go!). */
 .btn-bevel {
   font-family: inherit;
   font-size: 11px;
-  padding: 1px 7px;
+  padding: 1px 6px;
   color: #000;
   background: var(--bevel-face);
   border: 1px solid;
   border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
   cursor: pointer;
 }
-.btn-bevel:active {
-  border-color: var(--bevel-dark) var(--bevel-light) var(--bevel-light) var(--bevel-dark);
-}
+.btn-bevel:active { border-color: var(--bevel-dark) var(--bevel-light) var(--bevel-light) var(--bevel-dark); }
 
-/* Generic flat colored image placeholder (replaces all copyrighted art). */
-.img-ph {
-  display: inline-block;
-  background: var(--promo-panel-green);
-  border: 1px solid var(--lavender-border);
-}
-
-.more-link {
-  display: block;
-  text-align: right;
-  font-size: 10px;
-  margin-top: 3px;
+/* Round green "Go" button used in search bars. */
+.btn-go {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid #2C6A0F;
+  background: radial-gradient(circle at 35% 30%, #8FD24A, #3F8C12);
+  color: #fff;
+  font-weight: bold;
+  font-size: 11px;
+  cursor: pointer;
 }
 
 /* ---------------------------------------------------------------------------
-   3. MASTHEAD
+   3. MASTHEAD (orange band: logo + search + corner links)
    --------------------------------------------------------------------------- */
 .masthead {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: var(--box-white);
-  padding: 6px 8px;
-  border-bottom: 1px solid #C9D6E8; /* soft blue underline under the whole strip */
+  gap: 16px;
+  background: var(--orange);
+  padding: 6px 10px;
 }
-
-.logo { display: flex; align-items: center; gap: 6px; }
+.logo { display: flex; align-items: center; gap: 7px; }
 .logo__mark { display: block; }
-.logo__word {
-  font-size: 26px;
-  font-weight: bold;
-  letter-spacing: -1px;
-  color: var(--text-dark);
-}
+.logo__word { font-size: 26px; font-weight: bold; color: #5E2C8C; letter-spacing: -1px; }
+.logo__word span { color: var(--ink); }
 
-.search { display: flex; align-items: center; gap: 6px; margin-left: auto; }
-
-/* Rounded purple search capsule holding the label + white input. */
-.search__pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--box-purple);
-  border-radius: 11px;
-  padding: 2px 4px 2px 8px;
-}
-.search__glyph { color: #fff; font-size: 10px; }
-.search__label { color: #fff; font-weight: bold; font-size: 11px; }
-.search__input {
-  width: 150px;
+.masthead__search { text-align: center; flex: 1; }
+.masthead__search h2 { font-size: 15px; font-weight: bold; color: var(--ink); margin-bottom: 2px; }
+.masthead__search .row { display: inline-flex; align-items: center; gap: 6px; }
+.masthead__search input {
+  width: 220px; font-family: inherit; font-size: 12px; padding: 2px 4px;
   border: 1px solid var(--bevel-dark);
-  font-family: inherit;
-  font-size: 11px;
-  padding: 1px 3px;
-}
-.search__scope { font-size: 11px; color: var(--text-dark); }
-.search__scope label { white-space: nowrap; margin-right: 2px; }
-.search__scope input { vertical-align: middle; margin: 0 1px 0 4px; }
-
-/* ---------------------------------------------------------------------------
-   4. PRIMARY NAV (olive strip)
-   --------------------------------------------------------------------------- */
-.nav-primary {
-  background: var(--nav-olive);
-  padding: 6px 8px;
-  text-align: center;
-}
-.nav-primary ul { display: inline; }
-.nav-primary li { display: inline; }
-/* Pipe separators between links (skip the last). */
-.nav-primary li:not(:last-child)::after { content: " | "; color: var(--text-dark); font-weight: bold; }
-.nav-primary a { color: var(--text-dark); font-weight: bold; }
-
-/* ---------------------------------------------------------------------------
-   5. AD SLOT (fictional banner + rotated label)
-   --------------------------------------------------------------------------- */
-.ad-slot {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 0 8px 2px;
-}
-.ad-slot__label {
-  /* Rotated "ADVERTISEMENT" gutter label, as in the reference. */
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: var(--text-warm);
-}
-.ad-banner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 468px;
-  height: 60px;
-  margin: 0 auto;
-  padding: 0 12px;
-  color: #fff;
-  background: linear-gradient(120deg, #1B3C8C 0%, #2E6FC0 55%, #59A6E8 100%);
-  border: 1px solid #0A1F4D;
-  overflow: hidden;
-}
-.ad-banner:hover { text-decoration: none; }
-.ad-banner__brand { font-size: 20px; font-weight: bold; letter-spacing: -0.5px; text-shadow: 1px 1px 0 #0A1F4D; }
-.ad-banner__tld { color: #FFD14D; }
-.ad-banner__pitch { font-size: 11px; line-height: 1.25; }
-.ad-banner__pitch strong { display: block; font-size: 13px; }
-.ad-banner__pitch em { color: #FFD14D; font-style: italic; }
-.ad-banner__cta {
-  margin-left: auto;
-  white-space: nowrap;
-  font-weight: bold;
-  font-size: 11px;
-  padding: 3px 8px;
-  background: #FFD14D;
-  color: #1B3C8C;
-  border: 1px solid #fff;
 }
 
-/* ---------------------------------------------------------------------------
-   6. FIVE-BOX ROW (square purple-header boxes)
-   --------------------------------------------------------------------------- */
-.box-row {
+/* Corner link grid (top-right, light panel). */
+.head-links {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.box {
-  background: var(--lavender);
-  border: 1px solid var(--lavender-border);
-}
-.box__head {
-  background: var(--box-purple);
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 3px 5px;
-}
-.box__body { padding: 5px 6px; }
-.box__body li { padding: 1px 0; }
-
-/* ---------------------------------------------------------------------------
-   7. THREE-COLUMN BAND
-   --------------------------------------------------------------------------- */
-.band {
-  display: grid;
-  grid-template-columns: 7fr 5fr 3fr;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-/* --- Left: news --- */
-.news__date {
-  font-size: 12px;
-  font-weight: bold;
-  color: var(--text-purple);
-  border-bottom: 1px solid var(--lavender-border);
-  padding-bottom: 3px;
-  margin-bottom: 6px;
-}
-.news__item { display: flex; gap: 8px; margin-bottom: 8px; }
-.img-ph--news { width: 92px; height: 70px; flex: 0 0 92px; }
-.news__text h3 { font-size: 12px; color: var(--text-purple); margin-bottom: 2px; }
-.news__text p { font-size: 11px; }
-.news__checkout { font-size: 11px; margin: 6px 0 10px; }
-.community-topics h3 {
-  font-size: 12px;
-  color: var(--text-purple);
-  border-bottom: 1px solid var(--lavender-border);
-  padding-bottom: 3px;
-  margin-bottom: 5px;
-}
-.community-topics__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-.community-topics li { padding: 1px 0; }
-.community-topics li::before { content: ":: "; color: var(--text-warm); }
-
-/* --- Center: download + promo --- */
-.promo { display: flex; flex-direction: column; gap: 8px; }
-
-/* Beveled orange download button. */
-.download-btn {
-  display: block;
-  text-align: center;
-  padding: 8px 6px;
-  color: #fff;
-  background: linear-gradient(to bottom, var(--orange-top), var(--orange-bottom));
-  border-top: 1px solid var(--orange-highlight);   /* inner top bevel */
-  border-bottom: 1px solid var(--orange-shadow);   /* inner bottom bevel */
-  box-shadow: 1px 2px 3px rgba(0,0,0,0.35);        /* outer drop shadow */
-}
-.download-btn:hover { text-decoration: none; }
-.download-btn__small { display: block; font-size: 13px; font-weight: bold; }
-.download-btn__big { display: block; font-size: 28px; font-weight: bold; line-height: 1.05; }
-
-/* --- Right: sidebar --- */
-.sidebar { display: flex; flex-direction: column; gap: 8px; }
-
-/* ---------------------------------------------------------------------------
-   8. ANGULAR TAB BOXES (About, Newest, Agents promo, Languages)
-   Signature element: header band with a clipped corner sitting on a khaki
-   drop shadow (folder-tab + paper-shadow look), plus a small angled
-   bottom-right "tab" link.
-   --------------------------------------------------------------------------- */
-.box--tab {
-  position: relative;
-  background: var(--box-white);
-  border: 1px solid var(--tab-khaki);
-  /* Khaki paper shadow behind the box. */
-  box-shadow: 4px 4px 0 var(--tab-khaki);
-  margin-bottom: 4px;
-  padding-bottom: 16px; /* room for the bottom-right corner tab */
-}
-.box--tab__head {
-  position: relative;
-  display: inline-block;
-  background: var(--tab-khaki);
-  color: var(--text-dark);
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 22px 2px 8px;
-  /* Angled (clipped) top-right corner -> the folder-tab silhouette. */
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
-}
-.box--tab__head.accent-red { color: var(--accent-red); }
-.box--tab__body { padding: 6px 8px; }
-
-/* Small angled khaki tab anchored bottom-right ("Check it!", "Get it!", "More..."). */
-.tab-corner {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  background: var(--tab-khaki);
-  color: var(--text-dark);
+  grid-template-columns: auto auto;
+  gap: 1px 14px;
+  background: var(--orange-pale);
+  border: 1px solid var(--orange-deep);
+  padding: 4px 8px;
   font-size: 10px;
-  font-weight: bold;
-  padding: 2px 8px 2px 14px;
-  clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%);
 }
-.tab-corner:hover { text-decoration: none; color: #000; }
+.head-links a { white-space: nowrap; }
 
-/* Agents promo box (green inner panel, "Agents Online" glyph). */
-.promo-agents { background: var(--promo-panel-green); }
-.promo-agents .box--tab__body { display: flex; gap: 8px; align-items: center; }
-.promo-agents__copy h3 { font-size: 12px; color: var(--text-dark); margin-bottom: 3px; }
-.promo-agents__copy p { font-size: 11px; }
-.promo-agents__glyph {
-  flex: 0 0 60px;
-  width: 60px; height: 60px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #8FC13E, #4E7D14);
-  color: #fff;
+/* ---------------------------------------------------------------------------
+   4. ICON NAV (white strip with 7 labeled icons)
+   --------------------------------------------------------------------------- */
+.icon-nav {
+  display: flex;
+  justify-content: space-around;
+  background: var(--white);
+  border-top: 2px solid var(--orange);
+  border-bottom: 2px solid var(--orange);
+  padding: 6px 4px;
+}
+.icon-nav a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 11px;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+  gap: 3px;
+  color: var(--ink);
+  font-size: 10px;
+  text-align: center;
+  width: 96px;
 }
-
-/* Languages banner. */
-.languages { background: var(--promo-panel-green); }
-.languages__body { display: flex; gap: 8px; align-items: center; }
-.flags { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--lavender-border); }
-.flag { width: 18px; height: 24px; display: block; }
-.flag--a { background: #C8102E; }
-.flag--b { background: #0033A0; }
-.flag--c { background: #009739; }
-
-/* About box check-list. */
-.check-list li { padding: 2px 0 2px 16px; position: relative; }
-.check-list li::before {
-  content: "\2713"; /* check mark bullet */
-  position: absolute; left: 2px;
-  color: #2E7D14; font-weight: bold;
-}
-
-/* Newest in Linear. */
-.newest__date { font-weight: bold; color: var(--text-purple); margin-bottom: 3px; }
-.newest__list li { padding: 1px 0; }
+.icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
+.icon-nav svg { width: 34px; height: 34px; }
 
 /* ---------------------------------------------------------------------------
-   9. BULLETIN GRID (teal-header panels)
+   5. SUB-NAV (orange band: blue links + "What's Hot In" tab)
    --------------------------------------------------------------------------- */
-.bulletin {
-  display: grid;
-  grid-template-columns: 1.9fr 1fr 1fr 1.05fr;
-  gap: 6px;
+.subnav {
+  display: flex;
+  align-items: stretch;
+  background: var(--orange);
+  padding-left: 12px;
 }
-.bulletin__col { display: flex; flex-direction: column; gap: 6px; }
-
-.panel {
-  background: var(--box-white);
-  border: 1px solid #9FB0AA; /* muted grey-green */
+.subnav__links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex: 1;
 }
-.panel__head {
-  background: var(--teal-head);
-  color: var(--text-purple);
+.subnav__links a { color: var(--link-blue); font-weight: bold; font-size: 11px; }
+.subnav__hot {
+  display: flex;
+  align-items: center;
+  background: var(--cream);
+  border: 1px solid var(--orange-deep);
+  border-bottom: 0;
+  color: var(--link-red);
   font-weight: bold;
   font-size: 12px;
-  padding: 3px 6px;
-}
-.panel__body { padding: 6px; }
-
-/* Cycles spotlight. */
-.cycles .img-ph--game { width: 80px; height: 56px; float: left; margin: 0 8px 4px 0; }
-.cycles__text p { font-size: 11px; }
-.btn-red {
-  display: inline-block;
-  margin-top: 5px;
-  background: linear-gradient(to bottom, #E23B3B, var(--accent-red));
-  color: #fff;
-  font-weight: bold;
-  font-size: 11px;
-  padding: 2px 10px;
-  border: 1px solid #8E0000;
-}
-.btn-red:hover { text-decoration: none; }
-.cycles .more-link { clear: both; }
-
-/* Standup cards. */
-.cards { display: flex; flex-wrap: wrap; gap: 6px; }
-.img-ph--card {
-  width: calc(50% - 3px);
-  height: 64px;
-  display: flex;
-  align-items: center;
+  padding: 6px 18px;
+  align-self: flex-end;
+  width: 168px;
   justify-content: center;
-  font-weight: bold;
-  color: var(--text-purple);
-  background: var(--tab-khaki-light);
 }
-.cards .more-link { width: 100%; }
-
-/* Form panels (Issue Search, Agents matchmaking). */
-.form-panel { display: flex; flex-direction: column; gap: 4px; }
-.form-panel select,
-.form-panel input[type="text"] {
-  font-family: inherit;
-  font-size: 11px;
-  padding: 1px 2px;
-  border: 1px solid var(--bevel-dark);
-  width: 100%;
-}
-.form-panel__row { display: flex; gap: 4px; }
-.form-panel__row select,
-.form-panel__row input { flex: 1; }
-.form-panel__check { font-size: 11px; display: flex; align-items: center; gap: 3px; }
-
-/* Goodies. */
-.goodies { display: flex; gap: 8px; }
-.goodies ul { flex: 1; }
-.goodies li { padding: 1px 0 1px 10px; position: relative; }
-.goodies li::before { content: "\2022"; position: absolute; left: 0; color: var(--text-purple); }
-.img-ph--tee {
-  flex: 0 0 auto;
-  width: 52px; height: 56px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--tab-khaki-light);
-}
-
-/* User stories. */
-.img-ph--photo { width: 100%; height: 60px; display: block; margin-bottom: 4px; }
-.stories__caption { font-size: 11px; }
-.stories__quote { font-size: 10px; font-style: italic; color: var(--text-warm); margin-top: 3px; }
 
 /* ---------------------------------------------------------------------------
-   10. LAUNCH WIDGET (the page's only product-UI glimpse: a ghosted window)
+   6. PROMO ROW (freebie + careers + hot categories)
    --------------------------------------------------------------------------- */
-.launch {
-  position: relative;
-  background: var(--lavender-grey);
-  border: 1px solid var(--lavender-border);
-  padding: 8px;
-  min-height: 96px;
-  overflow: hidden;
+.promo-row {
+  display: grid;
+  grid-template-columns: 152px 1fr 168px;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
 }
-/* Faint greyed client-window silhouette behind the Launch button. */
-.launch__ghost {
-  position: absolute;
-  inset: 6px 6px auto 6px;
-  opacity: 0.35;
-}
-.ghost-win {
-  background: #ECECE6;
-  border: 1px solid #9A9A90;
-  box-shadow: inset 1px 1px 0 #fff;
-}
-.ghost-win__bar {
-  display: flex;
-  justify-content: space-between;
-  background: linear-gradient(to bottom, #BFBFB4, #A6A69A);
-  color: #3A3A33;
-  font-size: 9px;
-  padding: 1px 4px;
-}
-.ghost-win__btns { letter-spacing: 1px; }
-.ghost-win__row {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  color: #4A4A42;
-  padding: 2px 5px;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #C7C7BD; /* 1px ridge between rows */
-}
-.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex: 0 0 7px; }
-.dot--green { background: #5CA150; }
-.dot--amber { background: #C9952B; }
-.dot--grey { background: #9A9A90; }
+.promo-row > * { padding: 8px; }
 
-/* Foreground overlay: hint + dark Launch button + copy. */
-.launch__overlay { position: relative; text-align: center; }
-.launch__hint { font-size: 10px; color: var(--text-warm); text-align: right; margin-bottom: 28px; }
-.launch__btn {
-  display: inline-block;
-  background: linear-gradient(to bottom, #6E6E78, #3C3C44);
+/* "Get Linear for Free" oval + user counter. */
+.freebie { text-align: center; }
+.freebie__oval {
+  display: block;
+  margin: 0 auto 4px;
+  width: 122px; height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #9BDB4E, var(--green-bright-2));
+  border: 2px solid #2C6A0F;
   color: #fff;
-  font-size: 18px;
   font-weight: bold;
-  padding: 6px 14px;
-  border: 1px solid #2A2A30;
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  font-size: 12px;
+  line-height: 1.1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.35);
 }
-.launch__btn:hover { text-decoration: none; }
-.launch__copy { font-size: 10px; margin-top: 6px; }
-
-/* "More on Linear.app" purple box. */
-.panel--purple { border-color: var(--box-purple); background: var(--lavender-grey); }
-.panel__head--purple { background: var(--box-purple); color: #fff; }
-.more-on__body h3 { font-size: 12px; color: var(--text-purple); margin-bottom: 4px; }
-.more-on__body li { padding: 1px 0 1px 10px; position: relative; }
-.more-on__body li::before { content: "\2022"; position: absolute; left: 0; color: var(--text-purple); }
-
-/* ---------------------------------------------------------------------------
-   11. FOOTER
-   --------------------------------------------------------------------------- */
-.site-footer {
-  text-align: center;
-  font-size: 10px;
-  padding: 12px 8px 18px;
-  color: var(--text-dark);
-}
-.site-footer__row { margin-bottom: 3px; }
-.site-footer__terms { margin: 6px 0 2px; }
-.site-footer__copy { color: var(--text-warm); }
-.site-footer__counter {
-  margin-top: 6px;
-  color: var(--text-warm);
-}
-#visitor-counter {
+.freebie__oval small { font-size: 9px; font-weight: normal; }
+.freebie__counter {
   font-family: "Courier New", monospace;
   font-weight: bold;
-  letter-spacing: 1px;
-  background: #1A1A1A;
-  color: #41D041;
-  padding: 1px 4px;
+  letter-spacing: 2px;
+  background: #111; color: #FF7A00;
+  border: 1px solid #000;
+  padding: 1px 6px;
+  display: inline-block;
 }
+.freebie__caption { font-size: 9px; color: var(--ink-soft); margin-top: 2px; }
+
+/* "Linear Careers" promo. */
+.careers {
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.careers__box {
+  display: flex; align-items: center; gap: 10px;
+  border: 2px solid var(--orange); border-radius: 16px;
+  background: var(--white);
+  padding: 8px 16px;
+}
+.careers__icon { font-size: 22px; }
+.careers__box strong { color: var(--link-orange); }
+
+/* "What's Hot In" category box. */
+.hotbox { background: var(--cream); border: 1px solid var(--orange-deep); }
+.hotbox ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
+.hotbox li a { color: var(--link-blue); font-weight: bold; font-size: 10px; }
+
+/* ---------------------------------------------------------------------------
+   7. MAIN COLUMNS (four-column dense link board)
+   --------------------------------------------------------------------------- */
+.columns {
+  display: grid;
+  grid-template-columns: 152px 1fr 1fr 168px;
+}
+.col { padding: 0 8px 10px; }
+/* Thin vertical separators between columns. */
+.col + .col { border-left: 1px solid var(--rule); }
+
+/* Green section header bar. */
+.sec-head {
+  text-align: center;
+  background: var(--green-head);
+  border: 1px solid var(--green-head-edge);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 4px;
+  margin: 8px 0 5px;
+}
+.sec-head--orange { background: var(--orange); border-color: var(--orange-deep); color: var(--ink); }
+
+/* Dense link lists. */
+.linklist li { padding: 1px 0 1px 8px; position: relative; font-size: 11px; }
+.linklist li::before { content: "\2022"; position: absolute; left: 0; color: var(--link-red); }
+.linklist a { color: var(--link-blue); }
+.linklist .more a { color: var(--link-blue); font-style: italic; }
+.linklist .lead { color: var(--link-red); font-weight: bold; }
+
+/* Plain (bulleted-blue) topic lists used in "Talk About" / topic columns. */
+.topiclist li { padding: 1px 0; font-size: 11px; }
+.topiclist a { color: var(--link-blue); font-weight: bold; }
+
+.more { list-style: none; padding-left: 0 !important; text-align: right; }
+.more::before { content: "" !important; }
+.more a { font-style: italic; }
+
+/* "What's New" / "Spotlight" feature items with big red drop-cap. */
+.feature { margin-bottom: 8px; padding-left: 2px; }
+.feature__cap {
+  float: left;
+  font-size: 22px; font-weight: bold; line-height: 0.9;
+  color: var(--link-red);
+  margin: 0 3px 0 0;
+}
+.feature p { font-size: 11px; }
+.feature .hl { color: var(--link-red); font-weight: bold; }
+
+/* "What's Hot In:" inline definition list (Spotlight). */
+.hotin { font-size: 11px; margin: 4px 0 6px; }
+.hotin dt { display: inline; font-weight: bold; color: var(--link-red); }
+.hotin dd { display: inline; margin: 0; }
+.hotin .pair { display: block; padding: 1px 0; }
+
+/* Nested community sub-lists. */
+.subgroup { margin-bottom: 5px; }
+.subgroup > .lead { color: var(--link-red); font-weight: bold; display: block; }
+.subgroup ul { padding-left: 8px; }
+.subgroup li { font-size: 11px; padding: 0; }
+.subgroup .muted a { color: var(--ink-soft); }
+
+/* Newsletter sign-up. */
+.newsletter label { display: block; margin-bottom: 3px; font-weight: bold; }
+.newsletter input[type="text"] { width: 96px; font-family: inherit; font-size: 11px; padding: 1px 2px; border: 1px solid var(--bevel-dark); }
+.newsletter .opts { margin-top: 4px; }
+.newsletter .opts label { display: block; font-weight: normal; }
+
+/* Around-the-world languages two-column block. */
+.langs { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
+.langs li { padding: 1px 0; font-size: 11px; }
+
+/* ---------------------------------------------------------------------------
+   8. FIND-TEAMMATES COLUMN (search widgets)
+   --------------------------------------------------------------------------- */
+.find h4 { font-size: 11px; color: var(--link-blue); text-align: center; margin: 8px 0 3px; }
+.find .note { font-size: 9px; color: var(--ink-soft); text-align: center; }
+.find .field { margin: 2px 0; }
+.find .field label { display: block; font-size: 10px; }
+.find input[type="text"] { width: 100%; font-family: inherit; font-size: 11px; padding: 1px 3px; border: 1px solid var(--bevel-dark); }
+.find select { width: 100%; font-family: inherit; font-size: 11px; }
+.find .center { text-align: center; margin: 4px 0; }
+.find .check { font-size: 10px; }
+.find .accent { color: var(--link-red); font-weight: bold; text-align: center; }
+.find .your-addr { font-size: 10px; }
+.find .your-addr p { margin-bottom: 4px; }
+
+/* ---------------------------------------------------------------------------
+   9. SEARCH-THE-WEB BAND
+   --------------------------------------------------------------------------- */
+.search-web { border-top: 2px solid var(--orange); }
+.search-web__head {
+  background: var(--orange);
+  color: var(--ink);
+  font-size: 13px; font-weight: bold;
+  text-align: center;
+  padding: 3px;
+}
+.search-web__body { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; padding: 8px 12px; }
+.search-web__body input { width: 180px; font-family: inherit; font-size: 12px; padding: 2px 4px; border: 1px solid var(--bevel-dark); }
+.search-web__body h4 { font-size: 11px; color: var(--link-red); margin-bottom: 3px; }
+.search-web__body .cats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; font-size: 10px; }
+.search-web__body a { color: var(--link-blue); }
+.search-web .row { display: flex; align-items: center; gap: 8px; }
+
+/* ---------------------------------------------------------------------------
+   10. CHARGING POLICY
+   --------------------------------------------------------------------------- */
+.charging { padding: 14px 40px 16px; text-align: center; border-top: 1px solid var(--rule); }
+.charging h3 { color: var(--link-blue); font-size: 13px; margin-bottom: 4px; }
+.charging p { font-size: 11px; color: var(--ink); }
+
+/* ---------------------------------------------------------------------------
+   11. FOOTER (orange)
+   --------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--orange);
+  text-align: center;
+  padding: 10px 8px 14px;
+  font-size: 10px;
+}
+.site-footer a { color: var(--link-red); font-weight: bold; }
+.site-footer__terms { margin: 6px 0 2px; font-weight: bold; color: var(--ink); }
+.site-footer__copy { color: var(--ink); }

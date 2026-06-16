@@ -103,11 +103,19 @@ img, svg { border: 0; vertical-align: middle; }
   gap: 16px;
   background: var(--orange);
   padding: 6px 10px;
+  /* Period bevel: light top edge, darker bottom edge on the orange band. */
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.35), inset 0 -3px 5px rgba(120,60,0,0.30);
 }
-.logo { display: flex; align-items: center; gap: 7px; }
-.logo__mark { display: block; }
-.logo__word { font-size: 26px; font-weight: bold; color: #5E2C8C; letter-spacing: -1px; }
-.logo__word span { color: var(--ink); }
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo__mark { display: block; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.25)); }
+.logo__text { display: flex; flex-direction: column; line-height: 1; }
+.logo__word {
+  font-size: 30px; font-weight: bold; letter-spacing: -1px; color: #4B1E84;
+  /* Retro chunky drop shadow on the wordmark. */
+  text-shadow: 2px 2px 0 rgba(255,255,255,0.6), 3px 3px 0 rgba(0,0,0,0.18);
+}
+.logo__word span { color: #2C7A12; }
+.logo__tag { font-size: 11px; font-style: italic; color: #4B1E84; margin-top: 2px; }
 
 .masthead__search { text-align: center; flex: 1; }
 .masthead__search h2 { font-size: 15px; font-weight: bold; color: var(--ink); margin-bottom: 2px; }
@@ -141,6 +149,7 @@ img, svg { border: 0; vertical-align: middle; }
   padding: 6px 4px;
 }
 .icon-nav a {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -149,9 +158,19 @@ img, svg { border: 0; vertical-align: middle; }
   font-size: 10px;
   text-align: center;
   width: 96px;
+  padding-top: 4px;
+}
+/* Soft "spotlight dome" arch behind each icon, echoing the reference scallops. */
+.icon-nav a::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  width: 60px; height: 34px;
+  border-radius: 0 0 60px 60px / 0 0 34px 34px;
+  background: radial-gradient(ellipse at 50% 0%, var(--orange-pale), rgba(255,255,255,0) 70%);
 }
 .icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
-.icon-nav svg { width: 34px; height: 34px; }
+.icon-nav svg { position: relative; width: 36px; height: 36px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.25)); }
 
 /* ---------------------------------------------------------------------------
    5. SUB-NAV (orange band: blue links + "What's Hot In" tab)
@@ -161,6 +180,7 @@ img, svg { border: 0; vertical-align: middle; }
   align-items: stretch;
   background: var(--orange);
   padding-left: 12px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30), inset 0 -3px 5px rgba(120,60,0,0.30);
 }
 .subnav__links {
   display: flex;
@@ -168,20 +188,24 @@ img, svg { border: 0; vertical-align: middle; }
   gap: 26px;
   flex: 1;
 }
-.subnav__links a { color: var(--link-blue); font-weight: bold; font-size: 11px; }
+/* Main tabs render red, matching the reference (not blue). */
+.subnav__links a { color: var(--link-red); font-weight: bold; font-size: 12px; text-shadow: 1px 1px 0 rgba(255,255,255,0.35); }
 .subnav__hot {
   display: flex;
   align-items: center;
   background: var(--cream);
   border: 1px solid var(--orange-deep);
   border-bottom: 0;
+  border-radius: 8px 8px 0 0;     /* raised folder-tab corners */
   color: var(--link-red);
   font-weight: bold;
-  font-size: 12px;
-  padding: 6px 18px;
+  font-size: 13px;
+  font-style: italic;
+  padding: 7px 18px;
   align-self: flex-end;
   width: 168px;
   justify-content: center;
+  box-shadow: -2px -2px 4px rgba(120,60,0,0.25);
 }
 
 /* ---------------------------------------------------------------------------
@@ -202,7 +226,7 @@ img, svg { border: 0; vertical-align: middle; }
   margin: 0 auto 4px;
   width: 122px; height: 58px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 30%, #9BDB4E, var(--green-bright-2));
+  background: radial-gradient(circle at 40% 28%, #B6E86A, #9BDB4E 35%, var(--green-bright-2));
   border: 2px solid #2C6A0F;
   color: #fff;
   font-weight: bold;
@@ -210,6 +234,7 @@ img, svg { border: 0; vertical-align: middle; }
   line-height: 1.1;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-shadow: 1px 1px 0 rgba(0,0,0,0.35);
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.30), inset 0 4px 6px rgba(255,255,255,0.35);
 }
 .freebie__oval small { font-size: 9px; font-weight: normal; }
 .freebie__counter {
@@ -228,16 +253,18 @@ img, svg { border: 0; vertical-align: middle; }
   display: flex; align-items: center; gap: 10px; justify-content: center;
 }
 .careers__box {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 12px;
   border: 2px solid var(--orange); border-radius: 16px;
   background: var(--white);
   padding: 8px 16px;
+  box-shadow: 3px 3px 4px rgba(0,0,0,0.20);
 }
-.careers__icon { font-size: 22px; }
+.careers__icon { flex: 0 0 auto; width: 48px; height: 32px; }
+.careers__box p { font-size: 13px; }
 .careers__box strong { color: var(--link-orange); }
 
 /* "What's Hot In" category box. */
-.hotbox { background: var(--cream); border: 1px solid var(--orange-deep); }
+.hotbox { background: var(--cream); border: 1px solid var(--orange-deep); box-shadow: 2px 2px 4px rgba(120,60,0,0.20); }
 .hotbox ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
 .hotbox li a { color: var(--link-blue); font-weight: bold; font-size: 10px; }
 
@@ -252,32 +279,48 @@ img, svg { border: 0; vertical-align: middle; }
 /* Thin vertical separators between columns. */
 .col + .col { border-left: 1px solid var(--rule); }
 
-/* Green section header bar. */
+/* Green section header bar (slight raised 3D edge). */
 .sec-head {
   text-align: center;
-  background: var(--green-head);
+  background: linear-gradient(to bottom, #B9D634, var(--green-head));
   border: 1px solid var(--green-head-edge);
   color: var(--ink);
   font-size: 12px;
   font-weight: bold;
   padding: 3px 4px;
   margin: 8px 0 5px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.5);
 }
-.sec-head--orange { background: var(--orange); border-color: var(--orange-deep); color: var(--ink); }
+.sec-head--orange { background: linear-gradient(to bottom, #FBB04E, var(--orange)); border-color: var(--orange-deep); color: var(--ink); }
 
-/* Dense link lists. */
-.linklist li { padding: 1px 0 1px 8px; position: relative; font-size: 11px; }
-.linklist li::before { content: "\2022"; position: absolute; left: 0; color: var(--link-red); }
+/* --- List bullet variants (matching the reference) --- */
+
+/* (a) Dense feature/link lists: small red round bullet. */
+.linklist li { padding: 1px 0 1px 9px; position: relative; font-size: 11px; }
+.linklist li::before { content: "\2022"; position: absolute; left: 0; color: var(--link-red); font-weight: bold; }
 .linklist a { color: var(--link-blue); }
 .linklist .more a { color: var(--link-blue); font-style: italic; }
 .linklist .lead { color: var(--link-red); font-weight: bold; }
 
-/* Plain (bulleted-blue) topic lists used in "Talk About" / topic columns. */
-.topiclist li { padding: 1px 0; font-size: 11px; }
-.topiclist a { color: var(--link-blue); font-weight: bold; }
+/* (b) Software list: small dark square bullet. */
+.dotlist li { padding: 1px 0 1px 10px; position: relative; font-size: 11px; }
+.dotlist li::before { content: "\25AA"; position: absolute; left: 0; color: #444; font-size: 9px; top: 1px; }
+.dotlist a { color: var(--link-blue); }
+.dotlist .more a { font-style: italic; }
 
-.more { list-style: none; padding-left: 0 !important; text-align: right; }
-.more::before { content: "" !important; }
+/* (c) Topic list: orange triangle arrow + bold link. */
+.arrowlist li { padding: 2px 0 2px 12px; position: relative; font-size: 11px; }
+.arrowlist li::before { content: "\25B8"; position: absolute; left: 0; color: var(--orange-deep); font-size: 10px; }
+.arrowlist a { color: var(--link-blue); font-weight: bold; }
+.arrowlist .more a { color: var(--link-red); }
+
+/* Plain (no-bullet) link lists used in the Find-Teammates column. */
+.topiclist li { padding: 1px 0; font-size: 11px; }
+.topiclist a { color: var(--link-blue); }
+
+/* "More ..." row: right-aligned, no bullet (override the list variants by specificity). */
+.linklist li.more, .dotlist li.more, .arrowlist li.more { padding-left: 0; text-align: right; }
+.linklist li.more::before, .dotlist li.more::before, .arrowlist li.more::before { content: ""; }
 .more a { font-style: italic; }
 
 /* "What's New" / "Spotlight" feature items with big red drop-cap. */
@@ -335,14 +378,16 @@ img, svg { border: 0; vertical-align: middle; }
 .search-web { border-top: 2px solid var(--orange); }
 .search-web__head {
   background: var(--orange);
-  color: var(--ink);
+  color: var(--link-blue);
   font-size: 13px; font-weight: bold;
   text-align: center;
   padding: 3px;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.35);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30), inset 0 -3px 5px rgba(120,60,0,0.30);
 }
-.search-web__body { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; padding: 8px 12px; }
+.search-web__body { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; padding: 8px 12px; background: var(--orange-pale); }
 .search-web__body input { width: 180px; font-family: inherit; font-size: 12px; padding: 2px 4px; border: 1px solid var(--bevel-dark); }
-.search-web__body h4 { font-size: 11px; color: var(--link-red); margin-bottom: 3px; }
+.search-web__body h4 { font-size: 11px; color: var(--link-blue); margin-bottom: 3px; }
 .search-web__body .cats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; font-size: 10px; }
 .search-web__body a { color: var(--link-blue); }
 .search-web .row { display: flex; align-items: center; gap: 8px; }
@@ -355,14 +400,26 @@ img, svg { border: 0; vertical-align: middle; }
 .charging p { font-size: 11px; color: var(--ink); }
 
 /* ---------------------------------------------------------------------------
-   11. FOOTER (orange)
+   11. FOOTER: white link row (orange-bordered) + orange terms band.
    --------------------------------------------------------------------------- */
-.site-footer {
+.site-footer { font-size: 10px; }
+/* White link bar, framed top and bottom by the brand orange. */
+.site-footer__links {
+  background: var(--white);
+  text-align: center;
+  padding: 8px;
+  border-top: 3px solid var(--orange);
+  border-bottom: 3px solid var(--orange);
+}
+.site-footer__links a { color: var(--link-red); font-weight: bold; }
+.site-footer__links a.alt { color: var(--link-blue); }
+/* Orange band carrying the terms notice + copyright. */
+.site-footer__legal {
   background: var(--orange);
   text-align: center;
-  padding: 10px 8px 14px;
-  font-size: 10px;
+  padding: 8px 8px 14px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30);
 }
-.site-footer a { color: var(--link-red); font-weight: bold; }
-.site-footer__terms { margin: 6px 0 2px; font-weight: bold; color: var(--ink); }
-.site-footer__copy { color: var(--ink); }
+.site-footer__terms { font-weight: bold; color: var(--ink); }
+.site-footer__terms a { color: var(--link-blue); }
+.site-footer__copy { color: var(--ink); margin-top: 2px; }

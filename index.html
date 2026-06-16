@@ -35,11 +35,31 @@
          =================================================================== -->
     <header class="masthead">
       <a class="logo" href="#" aria-label="Linear.com home">
-        <svg class="logo__mark" width="32" height="32" viewBox="0 0 34 34" aria-hidden="true">
-          <rect width="34" height="34" rx="7" fill="#5E2C8C"></rect>
-          <path d="M7 21 L21 7 M10 25 L25 10 M14 27 L27 14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"></path>
+        <!-- Retro emblem: a glossy beveled "planet" orbited by little teammates,
+             carrying the recreated Linear diagonal-line mark. Distinctive and
+             period-plausible; not an official Linear brand asset. -->
+        <svg class="logo__mark" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+          <defs>
+            <radialGradient id="globe" cx="38%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#9C6FD0"/>
+              <stop offset="55%" stop-color="#6A33A0"/>
+              <stop offset="100%" stop-color="#3F1A6E"/>
+            </radialGradient>
+          </defs>
+          <circle cx="24" cy="24" r="16" fill="url(#globe)" stroke="#2C1150" stroke-width="1.5"/>
+          <!-- gloss highlight -->
+          <ellipse cx="18" cy="15" rx="8" ry="4.5" fill="#FFFFFF" opacity="0.35"/>
+          <!-- recreated Linear lines -->
+          <path d="M15 30 L30 15 M18 33 L33 18 M22 34 L34 22" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+          <!-- orbiting teammates -->
+          <circle cx="42" cy="14" r="3.2" fill="#8FC13E" stroke="#2C1150" stroke-width="1"/>
+          <circle cx="6" cy="32" r="3.2" fill="#F7941D" stroke="#2C1150" stroke-width="1"/>
+          <circle cx="40" cy="38" r="2.6" fill="#2E6FC0" stroke="#2C1150" stroke-width="1"/>
         </svg>
-        <span class="logo__word">Linear<span>.com</span></span>
+        <span class="logo__text">
+          <span class="logo__word">Linear<span>.com</span></span>
+          <span class="logo__tag">"Linear is Shipping Happiness"</span>
+        </span>
       </a>
 
       <form class="masthead__search" action="#" onsubmit="return false">
@@ -118,7 +138,18 @@
 
       <div class="careers">
         <div class="careers__box">
-          <span class="careers__icon" aria-hidden="true">&#129309;</span>
+          <!-- Retro clip-art handshake (period-style flat graphic, drawn inline). -->
+          <svg class="careers__icon" viewBox="0 0 64 40" role="img" aria-label="Handshake">
+            <!-- left forearm: blue sleeve + skin -->
+            <rect x="-2" y="20" width="26" height="13" rx="6" fill="#2E3FA0" stroke="#1A256B" stroke-width="1"/>
+            <rect x="16" y="19" width="20" height="13" rx="6" fill="#E8B88A" stroke="#A9794B" stroke-width="1"/>
+            <!-- right forearm: purple sleeve + skin -->
+            <rect x="40" y="7" width="26" height="13" rx="6" fill="#7A3A9A" stroke="#4E2169" stroke-width="1"/>
+            <rect x="28" y="8" width="20" height="13" rx="6" fill="#E0A877" stroke="#A9794B" stroke-width="1"/>
+            <!-- clasp -->
+            <ellipse cx="32" cy="21" rx="9" ry="8.5" fill="#E8B88A" stroke="#A9794B" stroke-width="1.2"/>
+            <path d="M26 17 q6 -2.5 12 0 M26 21 q6 -2.5 12 0 M26 25 q6 -2.5 12 0" stroke="#A9794B" stroke-width="1" fill="none"/>
+          </svg>
           <p><strong>Linear Careers:</strong> Post your resume online and ship from anywhere in the world!</p>
         </div>
       </div>
@@ -142,7 +173,7 @@
       <!-- COLUMN 1 -->
       <div class="col col1">
         <h3 class="sec-head">Free Linear Software</h3>
-        <ul class="topiclist">
+        <ul class="dotlist">
           <li><a href="#">Free Linear Software</a></li>
           <li><a href="#">Linear 2000a Beta</a></li>
           <li><a href="#">What's new in Linear 2000a</a></li>
@@ -160,7 +191,7 @@
         </ul>
 
         <h3 class="sec-head">Talk About</h3>
-        <ul class="topiclist">
+        <ul class="arrowlist">
           <li><a href="#">Issues</a></li>
           <li><a href="#">Projects</a></li>
           <li><a href="#">Roadmaps</a></li>
@@ -195,7 +226,7 @@
         </form>
 
         <h3 class="sec-head">Find Teammates by Topic</h3>
-        <ul class="topiclist">
+        <ul class="arrowlist">
           <li><a href="#">Backend</a></li>
           <li><a href="#">Frontend</a></li>
           <li><a href="#">Design</a></li>
@@ -504,16 +535,18 @@
          FOOTER.
          =================================================================== -->
     <footer class="site-footer">
-      <p>
+      <div class="site-footer__links">
         <a href="#">About Linear</a> &bull;
-        <a href="#">Press Reviews</a> &bull;
-        <a href="#">A Letter to Our Users</a> &bull;
-        <a href="#">See Our Ranking</a> &bull;
-        <a href="#">Linear Awards</a> &bull;
+        <a class="alt" href="#">Press Reviews</a> &bull;
+        <a class="alt" href="#">A Letter to Our Users</a> &bull;
+        <a class="alt" href="#">See Our Ranking</a> &bull;
+        <a class="alt" href="#">Linear Awards</a> &bull;
         <a href="#">Contact Us</a>
-      </p>
-      <p class="site-footer__terms">[ Important Notice of Terms of Service. Please review the new Linear Privacy Policy and the new End User License Agreement. ]</p>
-      <p class="site-footer__copy">Copyright &copy;1998,1999,2000 Linear Inc. All Rights Reserved.</p>
+      </div>
+      <div class="site-footer__legal">
+        <p class="site-footer__terms">[ Important Notice of Terms of Service.<br>Please review the new <a href="#">Linear Privacy Policy</a> and the new <a href="#">End User License Agreement</a>. ]</p>
+        <p class="site-footer__copy">Copyright &copy;1998,1999,2000 Linear Inc. All Rights Reserved.</p>
+      </div>
     </footer>
 
   </div>

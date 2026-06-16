@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  PARODY / EDUCATIONAL RECONSTRUCTION. This page is a non-commercial design
+  exercise. It is not affiliated with, endorsed by, sponsored by, or connected
+  to Linear, Inc., ICQ, or any current company. All trademarks and brand names
+  are the property of their respective owners and are used here only for parody
+  and commentary. Not for distribution or commercial use.
+
+  "Linear, est. 2004" -- a deadpan reconstruction of the ICQ 2004 community
+  portal rebuilt with Linear's content. Static HTML + CSS + JS, no build step,
+  no framework, no dependencies. The page renders complete with JavaScript
+  disabled; script.js is enhancement only (visitor counter).
+  ============================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Period-authentic behaviour: fixed 770px canvas, proportionally scaled to fit narrow screens (no reflow). -->
+  <meta name="viewport" content="width=770">
+  <title>Linear - The product development system for teams and agents</title>
+  <meta name="description" content="Linear keeps your team and its agents on the same page. Plan cycles, triage issues, ship roadmaps. Download Linear 4 today.">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="disclaimer" content="Parody / educational reconstruction. Non-commercial design exercise. Not affiliated with or endorsed by Linear, Inc. or ICQ. All trademarks belong to their respective owners; used for parody and commentary only.">
+  <!-- Inline geometric favicon, no external file. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%235E2C8C'/%3E%3Cpath d='M3 10 L10 3 M5 12 L12 5 M7 13 L13 7' stroke='white' stroke-width='1.3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ===================================================================
+         MASTHEAD: Linear mark + wordmark (left), search chrome (right).
+         Search form is non-functional period chrome only.
+         =================================================================== -->
+    <header class="masthead">
+      <a class="logo" href="#" aria-label="Linear home">
+        <!-- Recreated flat geometric mark (not an official Linear brand asset). -->
+        <svg class="logo__mark" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+          <rect width="34" height="34" rx="7" fill="#5E2C8C"></rect>
+          <path d="M7 21 L21 7 M10 25 L25 10 M14 27 L27 14" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"></path>
+        </svg>
+        <span class="logo__word">Linear</span>
+      </a>
+
+      <form class="search" action="#" onsubmit="return false">
+        <span class="search__pill">
+          <span class="search__glyph" aria-hidden="true">&#128269;</span>
+          <label class="search__label" for="q">Linear Search:</label>
+          <input class="search__input" id="q" name="q" type="text" autocomplete="off">
+        </span>
+        <button class="btn-bevel search__go" type="submit">Search</button>
+        <span class="search__scope">
+          <label><input type="radio" name="scope" checked> The Site</label>
+          <label><input type="radio" name="scope"> Google</label>
+          <label><input type="radio" name="scope"> Teammates</label>
+        </span>
+      </form>
+    </header>
+
+    <!-- ===================================================================
+         PRIMARY NAV: single olive strip, pipe-separated links, centered.
+         =================================================================== -->
+    <nav class="nav-primary" aria-label="Primary">
+      <ul>
+        <li><a href="#">Downloads</a></li>
+        <li><a href="#">Issues</a></li>
+        <li><a href="#">Inbox</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Teams</a></li>
+        <li><a href="#">Integrations</a></li>
+        <li><a href="#">Linear Anywhere</a></li>
+        <li><a href="#">Templates</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+      <!-- =================================================================
+           AD SLOT: rotated "ADVERTISEMENT" label + fictional 468x60 banner.
+           Invented third-party brand, no real IP. Pure period decoration.
+           ================================================================= -->
+      <section class="ad-slot" aria-label="Advertisement">
+        <span class="ad-slot__label">ADVERTISEMENT</span>
+        <a class="ad-banner" href="#" aria-label="Advertisement: PixelNet dial-up internet">
+          <span class="ad-banner__brand">PixelNet<span class="ad-banner__tld">.net</span></span>
+          <span class="ad-banner__pitch">
+            <strong>56k that <em>flies.</em></strong>
+            1,000 FREE hours of dial-up!
+          </span>
+          <span class="ad-banner__cta">Click Here &#9658;</span>
+        </a>
+      </section>
+
+      <!-- =================================================================
+           FIVE-BOX ROW: equal square boxes, purple header + colon, the
+           last list item bold. Built with CSS Grid (5 columns).
+           ================================================================= -->
+      <section class="box-row" aria-label="Linear product areas">
+        <section class="box">
+          <h2 class="box__head"><span class="diamond" aria-hidden="true">&#9670;</span> 1.0 Intake:</h2>
+          <ul class="box__body">
+            <li>Triage</li><li>Customer Requests</li><li>Inbox</li><li>Dashboards</li>
+            <li><strong>Asks</strong></li>
+          </ul>
+        </section>
+        <section class="box">
+          <h2 class="box__head"><span class="diamond" aria-hidden="true">&#9670;</span> 2.0 Plan:</h2>
+          <ul class="box__body">
+            <li>Projects</li><li>Initiatives</li><li>Roadmaps</li><li>Milestones</li>
+            <li><strong>Documents</strong></li>
+          </ul>
+        </section>
+        <section class="box">
+          <h2 class="box__head"><span class="diamond" aria-hidden="true">&#9670;</span> 3.0 Build:</h2>
+          <ul class="box__body">
+            <li>Issues</li><li>Cycles</li>
+            <li><strong>Linear Agents</strong></li>
+          </ul>
+        </section>
+        <section class="box">
+          <h2 class="box__head"><span class="diamond" aria-hidden="true">&#9670;</span> 4.0 Diffs:</h2>
+          <ul class="box__body">
+            <li>Pull Requests</li><li>Code Review</li><li>GitHub &amp; GitLab</li>
+            <li><strong>Agent Output</strong></li>
+          </ul>
+        </section>
+        <section class="box">
+          <h2 class="box__head"><span class="diamond" aria-hidden="true">&#9670;</span> 5.0 Monitor:</h2>
+          <ul class="box__body">
+            <li>Insights</li><li>Analytics</li><li>Integrations</li>
+            <li><strong>SLAs</strong></li>
+          </ul>
+        </section>
+      </section>
+
+      <!-- =================================================================
+           THREE-COLUMN BAND: news (left), download/promo (center),
+           sidebar tab boxes (right).
+           ================================================================= -->
+      <div class="band">
+
+        <!-- LEFT: community news stack + community topics link list. -->
+        <section class="news">
+          <h2 class="news__date">Today in the Linear community - <span id="community-date">June 3, 119</span></h2>
+
+          <article class="news__item">
+            <span class="img-ph img-ph--news" role="img" aria-label="Illustration: Linear teams around a globe"></span>
+            <div class="news__text">
+              <h3>Linear Worldwide</h3>
+              <p>Linear teams are all over the globe. Let them help you plan your next cycle: ask them about the issues their squads are shipping and the roadmaps they swear by!</p>
+            </div>
+          </article>
+
+          <article class="news__item">
+            <span class="img-ph img-ph--news" role="img" aria-label="Illustration: the 2004 Olympics"></span>
+            <div class="news__text">
+              <h3>The 2004 Olympics</h3>
+              <p>Are you satisfied with the number of issues your team has already closed this cycle, or were you expecting to ship more? Post your thoughts!</p>
+            </div>
+          </article>
+
+          <p class="news__checkout"><strong>Check out:</strong>
+            <a class="link-orange" href="#">Good Charlotte</a> ::
+            <a class="link-orange" href="#">Jude Law</a> ::
+            <a class="link-orange" href="#">Linear for Desktop</a>
+          </p>
+
+          <nav class="community-topics" aria-label="More in the Linear Community">
+            <h3>More in the Linear Community</h3>
+            <div class="community-topics__cols">
+              <ul>
+                <li><a href="#">Engineering</a></li>
+                <li><a href="#">Design</a></li>
+                <li><a href="#">Product</a></li>
+                <li><a href="#">Startups</a></li>
+                <li><a href="#"><strong>Open Source</strong></a></li>
+              </ul>
+              <ul>
+                <li><a href="#">Roadmaps</a></li>
+                <li><a href="#">Changelogs</a></li>
+                <li><a href="#">Templates</a></li>
+                <li><a href="#"><strong>Integrations</strong></a></li>
+                <li><a href="#">Mobile</a></li>
+              </ul>
+            </div>
+          </nav>
+        </section>
+
+        <!-- CENTER: download button, agents promo (tab box), languages banner. -->
+        <section class="promo">
+          <a class="download-btn" href="#">
+            <span class="download-btn__small">Download</span>
+            <span class="download-btn__big">Linear 4</span>
+          </a>
+
+          <section class="box box--tab promo-agents">
+            <h2 class="box--tab__head accent-red">Linear Agents on Xtraz!</h2>
+            <div class="box--tab__body">
+              <div class="promo-agents__copy">
+                <h3>New Autonomous Agent on Linear 4</h3>
+                <p>The classic PRD becomes a thrilling surprise as a strategic agent drafts your spec and pushes the PR for you, only on Linear!</p>
+              </div>
+              <span class="promo-agents__glyph" role="img" aria-label="Agents Online badge">
+                <span>Agents</span><span>Online</span>
+              </span>
+            </div>
+            <a class="tab-corner" href="#">Check it!</a>
+          </section>
+
+          <aside class="box box--tab languages">
+            <h2 class="box--tab__head">Linear in Languages</h2>
+            <div class="box--tab__body languages__body">
+              <span class="flags" aria-hidden="true">
+                <span class="flag flag--a"></span><span class="flag flag--b"></span><span class="flag flag--c"></span>
+              </span>
+              <p>Now you can enjoy Linear 4 &amp; Agents features in <strong>Turkish, Russian &amp; Portuguese</strong>. Italian &amp; Chinese Simplified coming soon. See &amp; download more languages!</p>
+            </div>
+            <a class="tab-corner" href="#">Get it!</a>
+          </aside>
+        </section>
+
+        <!-- RIGHT: About + Newest in Linear (tab boxes). -->
+        <aside class="sidebar">
+          <section class="box box--tab about">
+            <h2 class="box--tab__head">About</h2>
+            <ul class="box--tab__body check-list">
+              <li><a href="#">What is Linear?</a></li>
+              <li><a href="#">Take the Linear Tour</a></li>
+            </ul>
+          </section>
+
+          <section class="box box--tab newest">
+            <h2 class="box--tab__head">Newest in Linear</h2>
+            <div class="box--tab__body">
+              <p class="newest__date">June 119</p>
+              <ul class="newest__list">
+                <li>Initiatives - Health</li>
+                <li>Cycles - Cooldown</li>
+                <li>Triage - Rules</li>
+                <li>Insights - Custom Views</li>
+              </ul>
+            </div>
+            <a class="tab-corner" href="#">More...</a>
+          </section>
+        </aside>
+      </div>
+
+      <!-- =================================================================
+           BULLETIN GRID: four columns of teal-header panels (plus the
+           ghosted Launch widget and the purple "More on Linear.app" box).
+           ================================================================= -->
+      <section class="bulletin" aria-label="Linear bulletin board">
+
+        <!-- Column 1: Cycles spotlight, then Send a Standup Card. -->
+        <div class="bulletin__col">
+          <section class="panel">
+            <h2 class="panel__head"><span class="diamond" aria-hidden="true">&#9670;</span> Linear Cycles</h2>
+            <div class="panel__body cycles">
+              <span class="img-ph img-ph--game" role="img" aria-label="Linear Cycles sprint game artwork"></span>
+              <div class="cycles__text">
+                <p>Race the clock and clear the board before your cycle closes, in this fast-paced weekly sprint!</p>
+                <a class="btn-red" href="#">Start a Cycle</a>
+              </div>
+              <a class="more-link" href="#">More Features...</a>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2 class="panel__head"><span class="diamond" aria-hidden="true">&#9670;</span> Send a Standup Card</h2>
+            <div class="panel__body cards">
+              <span class="img-ph img-ph--card" role="img" aria-label="Standup card: Ship It!">Ship It!</span>
+              <span class="img-ph img-ph--card" role="img" aria-label="Standup card: LGTM">LGTM</span>
+              <a class="more-link" href="#">More Cards...</a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Column 2: Issue Search, then Goodies. -->
+        <div class="bulletin__col">
+          <section class="panel">
+            <h2 class="panel__head"><span class="diamond" aria-hidden="true">&#9670;</span> Linear Issue Search</h2>
+            <div class="panel__body form-panel">
+              <select aria-label="Team"><option>Team</option></select>
+              <select aria-label="Status"><option>Status</option></select>
+              <select aria-label="Assignee"><option>Assignee</option></select>
+              <div class="form-panel__row">
+                <input type="text" value="Labels" aria-label="Labels">
+                <button class="btn-bevel" type="button">Go</button>
+              </div>
+              <label class="form-panel__check"><input type="checkbox" checked> <span aria-hidden="true">&#128100;</span> With avatars first</label>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2 class="panel__head"><span class="diamond" aria-hidden="true">&#9670;</span> Linear Goodies</h2>
+            <div class="panel__body goodies">
+              <ul>
+                <li>Notification Sounds</li>
+                <li>Custom Themes</li>
+                <li>Stickers</li>
+                <li>T-Shirts</li>
+              </ul>
+              <span class="img-ph img-ph--tee" role="img" aria-label="T-shirt with the Linear mark">
+                <svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="7" fill="#5E2C8C"></rect><path d="M7 21 L21 7 M10 25 L25 10 M14 27 L27 14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"></path></svg>
+              </span>
+            </div>
+          </section>
+        </div>
+
+        <!-- Column 3: Agents (matchmaking), then User Stories. -->
+        <div class="bulletin__col">
+          <section class="panel">
+            <h2 class="panel__head"><span class="diamond" aria-hidden="true">&#9670;</span> Linear Agents</h2>
+            <div class="panel__body form-panel">
+              <select aria-label="I am"><option>I am</option></select>
+              <select aria-label="Looking for"><option>Looking for</option></select>
+              <select aria-label="From"><option>From</option></select>
+              <div class="form-panel__row">
+                <select aria-label="Stack"><option>Stack</option></select>
+                <button class="btn-bevel" type="button">Go</button>
+              </div>
+              <a class="more-link" href="#">Linear Merge Album...</a>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2 class="panel__head"><span class="diamond" aria-hidden="true">&#9670;</span> Linear User Stories</h2>
+            <div class="panel__body stories">
+              <span class="img-ph img-ph--photo" role="img" aria-label="Photo: two teams celebrating a shipped launch"></span>
+              <p class="stories__caption">Meet OpenAI &amp; Ramp, two teams that met through Linear &amp; just shipped together!</p>
+              <p class="stories__quote">&ldquo;you will just feel it&rdquo; :: &ldquo;our speed is intense&rdquo;</p>
+              <a class="more-link" href="#">More Teams...</a>
+            </div>
+          </section>
+        </div>
+
+        <!-- Column 4: ghosted Launch widget, then "More on Linear.app". -->
+        <div class="bulletin__col">
+          <section class="launch">
+            <!-- Ghost client window: faint, greyed, period list silhouette behind the Launch button. -->
+            <div class="launch__ghost" aria-hidden="true">
+              <div class="ghost-win">
+                <div class="ghost-win__bar"><span>#ENG-128</span><span class="ghost-win__btns">_ &#9633; &times;</span></div>
+                <div class="ghost-win__row"><span class="dot dot--green"></span> ENG-128 Fix login redirect</div>
+                <div class="ghost-win__row"><span class="dot dot--amber"></span> ENG-131 Cycle planning</div>
+                <div class="ghost-win__row"><span class="dot dot--grey"></span> ENG-140 Triage rules</div>
+              </div>
+            </div>
+            <div class="launch__overlay">
+              <p class="launch__hint">Can't download?</p>
+              <a class="launch__btn" href="#">Launch <strong>Linear2GO</strong></a>
+              <p class="launch__copy">Use Linear from anywhere, on any computer!</p>
+            </div>
+          </section>
+
+          <section class="panel panel--purple more-on">
+            <h2 class="panel__head panel__head--purple"><span class="diamond" aria-hidden="true">&#9670;</span> More on Linear.app</h2>
+            <div class="panel__body more-on__body">
+              <h3>Linear Anywhere</h3>
+              <ul>
+                <li><a href="#">Linear for iOS</a></li>
+                <li><a href="#">Linear for Mac</a></li>
+                <li><a href="#">Linear for Windows</a></li>
+                <li><a href="#">Linear API</a></li>
+                <li><a href="#">Linear MCP</a></li>
+                <li><a href="#">Linear Mobile</a></li>
+                <li><a href="#">Linear Pro 2003b</a></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================================================================
+         FOOTER: two centered link rows, bracketed terms line, copyright,
+         and the period-correct visitor counter (populated by script.js).
+         =================================================================== -->
+    <footer class="site-footer">
+      <p class="site-footer__row">
+        <a href="#">User Feedback &amp; Comments</a> &bull;
+        <a href="#">Advertise With Us</a> &bull;
+        <a href="#">Contact Us</a> &bull;
+        <a href="#">About Linear</a> &bull;
+        <a href="#">The Linear Story</a> &bull;
+        <a href="#">Linear Awards</a> &bull;
+        <a href="#">Press Reviews</a>
+      </p>
+      <p class="site-footer__row">
+        <a href="#">See Our Ranking</a> &bull;
+        <a href="#">Rumors, Lies, Damn Lies and Velocity</a> &bull;
+        <a href="#">About Viral Marketing</a> &bull;
+        <a href="#">Pricing Policy</a>
+      </p>
+      <p class="site-footer__terms">[ Important Notice of Terms of Service. ]</p>
+      <p class="site-footer__copy">Copyright &copy;1998-2004 Linear Inc. All Rights Reserved.</p>
+      <p class="site-footer__counter">You are visitor #<span id="visitor-counter">0000000</span></p>
+    </footer>
+
+  </div>
+</body>
+</html>

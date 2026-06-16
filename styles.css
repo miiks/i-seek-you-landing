@@ -1,0 +1,575 @@
+/* ===========================================================================
+   "Linear, est. 2004" -- styles.css
+   Deadpan reconstruction of the ICQ 2004 portal with Linear content.
+   Order: design tokens -> base/reset -> layout -> components (DOM order).
+   System fonts only. No web fonts. No frameworks. No !important.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. DESIGN TOKENS (sampled from the ICQ 2004 reference)
+   --------------------------------------------------------------------------- */
+:root {
+  /* Surface & background */
+  --page-cream: #FFFFE5;
+  --page-stripe: #FBFBCB;
+  --box-white: #FFFFFF;
+
+  /* Purple system */
+  --box-purple: #5E2C8C;
+  --box-purple-deep: #552C82;
+
+  /* Lavender */
+  --lavender: #CCCCFF;
+  --lavender-grey: #C4C8DA;
+  --lavender-border: #9B97C4;
+
+  /* Navigation */
+  --nav-olive: #BFBF58;
+
+  /* Teal (bulletin headers) */
+  --teal-head: #90ACA5;
+
+  /* Tab / folder boxes */
+  --tab-khaki: #B1B295;
+  --tab-khaki-light: #E0D7CA;
+  --promo-panel-green: #CFD6C1;
+
+  /* Text */
+  --text-dark: #3A2541;
+  --text-warm: #5D5465;
+  --text-purple: #5E2C8C;
+
+  /* Links & accents */
+  --link-blue: #0000CC;
+  --link-orange: #CC6633;
+  --accent-red: #CC0000;
+
+  /* Orange download button */
+  --orange-top: #E8821C;
+  --orange-bottom: #C96A12;
+  --orange-highlight: #F4A94E;
+  --orange-shadow: #9E5210;
+
+  /* Period bevel greys */
+  --bevel-face: #D4D0C8;
+  --bevel-light: #FFFFFF;
+  --bevel-dark: #808080;
+}
+
+/* ---------------------------------------------------------------------------
+   2. BASE / RESET
+   --------------------------------------------------------------------------- */
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  /* Subtle alternating horizontal band behind the whole page (cream/stripe). */
+  background-color: var(--page-cream);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--page-cream) 0, var(--page-cream) 26px,
+    var(--page-stripe) 26px, var(--page-stripe) 52px
+  );
+  color: var(--text-dark);
+  font-family: Verdana, Geneva, Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+
+a { color: var(--link-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { border: 0; }
+
+/* Fixed 770px canvas, centered. Non-responsive by design; the viewport meta
+   scales the whole canvas down to fit narrow screens (no reflow). */
+.page {
+  width: 770px;
+  margin: 0 auto;
+  background: var(--page-cream);
+}
+
+.diamond { color: inherit; font-size: 0.8em; vertical-align: 1px; }
+.accent-red { color: var(--accent-red); }
+.link-orange { color: var(--link-orange); }
+
+/* Shared 2004 grey bevel button (Search, Go). */
+.btn-bevel {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 1px 7px;
+  color: #000;
+  background: var(--bevel-face);
+  border: 1px solid;
+  border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
+  cursor: pointer;
+}
+.btn-bevel:active {
+  border-color: var(--bevel-dark) var(--bevel-light) var(--bevel-light) var(--bevel-dark);
+}
+
+/* Generic flat colored image placeholder (replaces all copyrighted art). */
+.img-ph {
+  display: inline-block;
+  background: var(--promo-panel-green);
+  border: 1px solid var(--lavender-border);
+}
+
+.more-link {
+  display: block;
+  text-align: right;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   3. MASTHEAD
+   --------------------------------------------------------------------------- */
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--box-white);
+  padding: 6px 8px;
+  border-bottom: 1px solid #C9D6E8; /* soft blue underline under the whole strip */
+}
+
+.logo { display: flex; align-items: center; gap: 6px; }
+.logo__mark { display: block; }
+.logo__word {
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: var(--text-dark);
+}
+
+.search { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+
+/* Rounded purple search capsule holding the label + white input. */
+.search__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--box-purple);
+  border-radius: 11px;
+  padding: 2px 4px 2px 8px;
+}
+.search__glyph { color: #fff; font-size: 10px; }
+.search__label { color: #fff; font-weight: bold; font-size: 11px; }
+.search__input {
+  width: 150px;
+  border: 1px solid var(--bevel-dark);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 1px 3px;
+}
+.search__scope { font-size: 11px; color: var(--text-dark); }
+.search__scope label { white-space: nowrap; margin-right: 2px; }
+.search__scope input { vertical-align: middle; margin: 0 1px 0 4px; }
+
+/* ---------------------------------------------------------------------------
+   4. PRIMARY NAV (olive strip)
+   --------------------------------------------------------------------------- */
+.nav-primary {
+  background: var(--nav-olive);
+  padding: 6px 8px;
+  text-align: center;
+}
+.nav-primary ul { display: inline; }
+.nav-primary li { display: inline; }
+/* Pipe separators between links (skip the last). */
+.nav-primary li:not(:last-child)::after { content: " | "; color: var(--text-dark); font-weight: bold; }
+.nav-primary a { color: var(--text-dark); font-weight: bold; }
+
+/* ---------------------------------------------------------------------------
+   5. AD SLOT (fictional banner + rotated label)
+   --------------------------------------------------------------------------- */
+.ad-slot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0 8px 2px;
+}
+.ad-slot__label {
+  /* Rotated "ADVERTISEMENT" gutter label, as in the reference. */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--text-warm);
+}
+.ad-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 468px;
+  height: 60px;
+  margin: 0 auto;
+  padding: 0 12px;
+  color: #fff;
+  background: linear-gradient(120deg, #1B3C8C 0%, #2E6FC0 55%, #59A6E8 100%);
+  border: 1px solid #0A1F4D;
+  overflow: hidden;
+}
+.ad-banner:hover { text-decoration: none; }
+.ad-banner__brand { font-size: 20px; font-weight: bold; letter-spacing: -0.5px; text-shadow: 1px 1px 0 #0A1F4D; }
+.ad-banner__tld { color: #FFD14D; }
+.ad-banner__pitch { font-size: 11px; line-height: 1.25; }
+.ad-banner__pitch strong { display: block; font-size: 13px; }
+.ad-banner__pitch em { color: #FFD14D; font-style: italic; }
+.ad-banner__cta {
+  margin-left: auto;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 3px 8px;
+  background: #FFD14D;
+  color: #1B3C8C;
+  border: 1px solid #fff;
+}
+
+/* ---------------------------------------------------------------------------
+   6. FIVE-BOX ROW (square purple-header boxes)
+   --------------------------------------------------------------------------- */
+.box-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.box {
+  background: var(--lavender);
+  border: 1px solid var(--lavender-border);
+}
+.box__head {
+  background: var(--box-purple);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 5px;
+}
+.box__body { padding: 5px 6px; }
+.box__body li { padding: 1px 0; }
+
+/* ---------------------------------------------------------------------------
+   7. THREE-COLUMN BAND
+   --------------------------------------------------------------------------- */
+.band {
+  display: grid;
+  grid-template-columns: 7fr 5fr 3fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* --- Left: news --- */
+.news__date {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--text-purple);
+  border-bottom: 1px solid var(--lavender-border);
+  padding-bottom: 3px;
+  margin-bottom: 6px;
+}
+.news__item { display: flex; gap: 8px; margin-bottom: 8px; }
+.img-ph--news { width: 92px; height: 70px; flex: 0 0 92px; }
+.news__text h3 { font-size: 12px; color: var(--text-purple); margin-bottom: 2px; }
+.news__text p { font-size: 11px; }
+.news__checkout { font-size: 11px; margin: 6px 0 10px; }
+.community-topics h3 {
+  font-size: 12px;
+  color: var(--text-purple);
+  border-bottom: 1px solid var(--lavender-border);
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+}
+.community-topics__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.community-topics li { padding: 1px 0; }
+.community-topics li::before { content: ":: "; color: var(--text-warm); }
+
+/* --- Center: download + promo --- */
+.promo { display: flex; flex-direction: column; gap: 8px; }
+
+/* Beveled orange download button. */
+.download-btn {
+  display: block;
+  text-align: center;
+  padding: 8px 6px;
+  color: #fff;
+  background: linear-gradient(to bottom, var(--orange-top), var(--orange-bottom));
+  border-top: 1px solid var(--orange-highlight);   /* inner top bevel */
+  border-bottom: 1px solid var(--orange-shadow);   /* inner bottom bevel */
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.35);        /* outer drop shadow */
+}
+.download-btn:hover { text-decoration: none; }
+.download-btn__small { display: block; font-size: 13px; font-weight: bold; }
+.download-btn__big { display: block; font-size: 28px; font-weight: bold; line-height: 1.05; }
+
+/* --- Right: sidebar --- */
+.sidebar { display: flex; flex-direction: column; gap: 8px; }
+
+/* ---------------------------------------------------------------------------
+   8. ANGULAR TAB BOXES (About, Newest, Agents promo, Languages)
+   Signature element: header band with a clipped corner sitting on a khaki
+   drop shadow (folder-tab + paper-shadow look), plus a small angled
+   bottom-right "tab" link.
+   --------------------------------------------------------------------------- */
+.box--tab {
+  position: relative;
+  background: var(--box-white);
+  border: 1px solid var(--tab-khaki);
+  /* Khaki paper shadow behind the box. */
+  box-shadow: 4px 4px 0 var(--tab-khaki);
+  margin-bottom: 4px;
+  padding-bottom: 16px; /* room for the bottom-right corner tab */
+}
+.box--tab__head {
+  position: relative;
+  display: inline-block;
+  background: var(--tab-khaki);
+  color: var(--text-dark);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 22px 2px 8px;
+  /* Angled (clipped) top-right corner -> the folder-tab silhouette. */
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+}
+.box--tab__head.accent-red { color: var(--accent-red); }
+.box--tab__body { padding: 6px 8px; }
+
+/* Small angled khaki tab anchored bottom-right ("Check it!", "Get it!", "More..."). */
+.tab-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--tab-khaki);
+  color: var(--text-dark);
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 8px 2px 14px;
+  clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%);
+}
+.tab-corner:hover { text-decoration: none; color: #000; }
+
+/* Agents promo box (green inner panel, "Agents Online" glyph). */
+.promo-agents { background: var(--promo-panel-green); }
+.promo-agents .box--tab__body { display: flex; gap: 8px; align-items: center; }
+.promo-agents__copy h3 { font-size: 12px; color: var(--text-dark); margin-bottom: 3px; }
+.promo-agents__copy p { font-size: 11px; }
+.promo-agents__glyph {
+  flex: 0 0 60px;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #8FC13E, #4E7D14);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 11px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+}
+
+/* Languages banner. */
+.languages { background: var(--promo-panel-green); }
+.languages__body { display: flex; gap: 8px; align-items: center; }
+.flags { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--lavender-border); }
+.flag { width: 18px; height: 24px; display: block; }
+.flag--a { background: #C8102E; }
+.flag--b { background: #0033A0; }
+.flag--c { background: #009739; }
+
+/* About box check-list. */
+.check-list li { padding: 2px 0 2px 16px; position: relative; }
+.check-list li::before {
+  content: "\2713"; /* check mark bullet */
+  position: absolute; left: 2px;
+  color: #2E7D14; font-weight: bold;
+}
+
+/* Newest in Linear. */
+.newest__date { font-weight: bold; color: var(--text-purple); margin-bottom: 3px; }
+.newest__list li { padding: 1px 0; }
+
+/* ---------------------------------------------------------------------------
+   9. BULLETIN GRID (teal-header panels)
+   --------------------------------------------------------------------------- */
+.bulletin {
+  display: grid;
+  grid-template-columns: 1.9fr 1fr 1fr 1.05fr;
+  gap: 6px;
+}
+.bulletin__col { display: flex; flex-direction: column; gap: 6px; }
+
+.panel {
+  background: var(--box-white);
+  border: 1px solid #9FB0AA; /* muted grey-green */
+}
+.panel__head {
+  background: var(--teal-head);
+  color: var(--text-purple);
+  font-weight: bold;
+  font-size: 12px;
+  padding: 3px 6px;
+}
+.panel__body { padding: 6px; }
+
+/* Cycles spotlight. */
+.cycles .img-ph--game { width: 80px; height: 56px; float: left; margin: 0 8px 4px 0; }
+.cycles__text p { font-size: 11px; }
+.btn-red {
+  display: inline-block;
+  margin-top: 5px;
+  background: linear-gradient(to bottom, #E23B3B, var(--accent-red));
+  color: #fff;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 2px 10px;
+  border: 1px solid #8E0000;
+}
+.btn-red:hover { text-decoration: none; }
+.cycles .more-link { clear: both; }
+
+/* Standup cards. */
+.cards { display: flex; flex-wrap: wrap; gap: 6px; }
+.img-ph--card {
+  width: calc(50% - 3px);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--text-purple);
+  background: var(--tab-khaki-light);
+}
+.cards .more-link { width: 100%; }
+
+/* Form panels (Issue Search, Agents matchmaking). */
+.form-panel { display: flex; flex-direction: column; gap: 4px; }
+.form-panel select,
+.form-panel input[type="text"] {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 1px 2px;
+  border: 1px solid var(--bevel-dark);
+  width: 100%;
+}
+.form-panel__row { display: flex; gap: 4px; }
+.form-panel__row select,
+.form-panel__row input { flex: 1; }
+.form-panel__check { font-size: 11px; display: flex; align-items: center; gap: 3px; }
+
+/* Goodies. */
+.goodies { display: flex; gap: 8px; }
+.goodies ul { flex: 1; }
+.goodies li { padding: 1px 0 1px 10px; position: relative; }
+.goodies li::before { content: "\2022"; position: absolute; left: 0; color: var(--text-purple); }
+.img-ph--tee {
+  flex: 0 0 auto;
+  width: 52px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--tab-khaki-light);
+}
+
+/* User stories. */
+.img-ph--photo { width: 100%; height: 60px; display: block; margin-bottom: 4px; }
+.stories__caption { font-size: 11px; }
+.stories__quote { font-size: 10px; font-style: italic; color: var(--text-warm); margin-top: 3px; }
+
+/* ---------------------------------------------------------------------------
+   10. LAUNCH WIDGET (the page's only product-UI glimpse: a ghosted window)
+   --------------------------------------------------------------------------- */
+.launch {
+  position: relative;
+  background: var(--lavender-grey);
+  border: 1px solid var(--lavender-border);
+  padding: 8px;
+  min-height: 96px;
+  overflow: hidden;
+}
+/* Faint greyed client-window silhouette behind the Launch button. */
+.launch__ghost {
+  position: absolute;
+  inset: 6px 6px auto 6px;
+  opacity: 0.35;
+}
+.ghost-win {
+  background: #ECECE6;
+  border: 1px solid #9A9A90;
+  box-shadow: inset 1px 1px 0 #fff;
+}
+.ghost-win__bar {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, #BFBFB4, #A6A69A);
+  color: #3A3A33;
+  font-size: 9px;
+  padding: 1px 4px;
+}
+.ghost-win__btns { letter-spacing: 1px; }
+.ghost-win__row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #4A4A42;
+  padding: 2px 5px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #C7C7BD; /* 1px ridge between rows */
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex: 0 0 7px; }
+.dot--green { background: #5CA150; }
+.dot--amber { background: #C9952B; }
+.dot--grey { background: #9A9A90; }
+
+/* Foreground overlay: hint + dark Launch button + copy. */
+.launch__overlay { position: relative; text-align: center; }
+.launch__hint { font-size: 10px; color: var(--text-warm); text-align: right; margin-bottom: 28px; }
+.launch__btn {
+  display: inline-block;
+  background: linear-gradient(to bottom, #6E6E78, #3C3C44);
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 14px;
+  border: 1px solid #2A2A30;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+.launch__btn:hover { text-decoration: none; }
+.launch__copy { font-size: 10px; margin-top: 6px; }
+
+/* "More on Linear.app" purple box. */
+.panel--purple { border-color: var(--box-purple); background: var(--lavender-grey); }
+.panel__head--purple { background: var(--box-purple); color: #fff; }
+.more-on__body h3 { font-size: 12px; color: var(--text-purple); margin-bottom: 4px; }
+.more-on__body li { padding: 1px 0 1px 10px; position: relative; }
+.more-on__body li::before { content: "\2022"; position: absolute; left: 0; color: var(--text-purple); }
+
+/* ---------------------------------------------------------------------------
+   11. FOOTER
+   --------------------------------------------------------------------------- */
+.site-footer {
+  text-align: center;
+  font-size: 10px;
+  padding: 12px 8px 18px;
+  color: var(--text-dark);
+}
+.site-footer__row { margin-bottom: 3px; }
+.site-footer__terms { margin: 6px 0 2px; }
+.site-footer__copy { color: var(--text-warm); }
+.site-footer__counter {
+  margin-top: 6px;
+  color: var(--text-warm);
+}
+#visitor-counter {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background: #1A1A1A;
+  color: #41D041;
+  padding: 1px 4px;
+}

@@ -1,0 +1,425 @@
+/* ===========================================================================
+   "Linear.com, est. 2000" -- styles.css
+   Deadpan full replicant of the ICQ.com ~2000 portal homepage, rebuilt with
+   Linear content. Static HTML/CSS/JS, no build step, no dependencies.
+   Order: tokens -> base/reset -> layout -> components (DOM order).
+   System fonts only. No !important.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. DESIGN TOKENS (sampled from the ICQ.com 2000 reference)
+   --------------------------------------------------------------------------- */
+:root {
+  /* Brand orange (mastheads, sub-nav, footer, "Search the Web" bar) */
+  --orange: #F7941D;
+  --orange-deep: #E07B12;
+  --orange-pale: #FDE9CC;
+
+  /* Lime-green section headers */
+  --green-head: #A7C81C;
+  --green-head-edge: #7E9A12;
+  --green-bright: #6FB52B;   /* "Get Linear for Free" oval */
+  --green-bright-2: #3F8C12;
+
+  /* Surfaces */
+  --white: #FFFFFF;
+  --cream: #FFFFCC;          /* "What's Hot In" box, highlight panels */
+  --rule: #D9D9C0;           /* thin column separators / hairlines */
+
+  /* Text */
+  --ink: #222222;
+  --ink-soft: #4A4A4A;
+
+  /* Links & accents */
+  --link-blue: #0000CC;
+  --link-red: #CC0000;
+  --link-orange: #CC6600;
+  --hot-red: #D40000;
+
+  /* Bevels (period grey buttons) */
+  --bevel-face: #D4D0C8;
+  --bevel-light: #FFFFFF;
+  --bevel-dark: #808080;
+}
+
+/* ---------------------------------------------------------------------------
+   2. BASE / RESET
+   --------------------------------------------------------------------------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: #FFFFFF;
+  color: var(--ink);
+  font-family: Verdana, Geneva, Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.3;
+}
+h1, h2, h3, h4, p, ul, dl, dd, dt { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: var(--link-blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img, svg { border: 0; vertical-align: middle; }
+
+/* Fixed centered canvas; viewport meta scales it down on narrow screens. */
+.page {
+  width: 830px;
+  margin: 0 auto;
+  background: var(--white);
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+}
+
+/* Period grey bevel button (Search, Go, Go!). */
+.btn-bevel {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 1px 6px;
+  color: #000;
+  background: var(--bevel-face);
+  border: 1px solid;
+  border-color: var(--bevel-light) var(--bevel-dark) var(--bevel-dark) var(--bevel-light);
+  cursor: pointer;
+}
+.btn-bevel:active { border-color: var(--bevel-dark) var(--bevel-light) var(--bevel-light) var(--bevel-dark); }
+
+/* Round green "Go" button used in search bars. */
+.btn-go {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid #2C6A0F;
+  background: radial-gradient(circle at 35% 30%, #8FD24A, #3F8C12);
+  color: #fff;
+  font-weight: bold;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------------
+   3. MASTHEAD (orange band: logo + search + corner links)
+   --------------------------------------------------------------------------- */
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--orange);
+  padding: 6px 10px;
+  /* Period bevel: light top edge, darker bottom edge on the orange band. */
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.35), inset 0 -3px 5px rgba(120,60,0,0.30);
+}
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo__mark { display: block; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.25)); }
+.logo__text { display: flex; flex-direction: column; line-height: 1; }
+.logo__word {
+  font-size: 30px; font-weight: bold; letter-spacing: -1px; color: #4B1E84;
+  /* Retro chunky drop shadow on the wordmark. */
+  text-shadow: 2px 2px 0 rgba(255,255,255,0.6), 3px 3px 0 rgba(0,0,0,0.18);
+}
+.logo__word span { color: #2C7A12; }
+.logo__tag { font-size: 11px; font-style: italic; color: #4B1E84; margin-top: 2px; }
+
+.masthead__search { text-align: center; flex: 1; }
+.masthead__search h2 { font-size: 15px; font-weight: bold; color: var(--ink); margin-bottom: 2px; }
+.masthead__search .row { display: inline-flex; align-items: center; gap: 6px; }
+.masthead__search input {
+  width: 220px; font-family: inherit; font-size: 12px; padding: 2px 4px;
+  border: 1px solid var(--bevel-dark);
+}
+
+/* Corner link grid (top-right, light panel). */
+.head-links {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1px 14px;
+  background: var(--orange-pale);
+  border: 1px solid var(--orange-deep);
+  padding: 4px 8px;
+  font-size: 10px;
+}
+.head-links a { white-space: nowrap; }
+
+/* ---------------------------------------------------------------------------
+   4. ICON NAV (white strip with 7 labeled icons)
+   --------------------------------------------------------------------------- */
+.icon-nav {
+  display: flex;
+  justify-content: space-around;
+  background: var(--white);
+  border-top: 2px solid var(--orange);
+  border-bottom: 2px solid var(--orange);
+  padding: 6px 4px;
+}
+.icon-nav a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--ink);
+  font-size: 10px;
+  text-align: center;
+  width: 96px;
+  padding-top: 4px;
+}
+/* Soft "spotlight dome" arch behind each icon, echoing the reference scallops. */
+.icon-nav a::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  width: 60px; height: 34px;
+  border-radius: 0 0 60px 60px / 0 0 34px 34px;
+  background: radial-gradient(ellipse at 50% 0%, var(--orange-pale), rgba(255,255,255,0) 70%);
+}
+.icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
+.icon-nav svg { position: relative; width: 36px; height: 36px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.25)); }
+
+/* ---------------------------------------------------------------------------
+   5. SUB-NAV (orange band: blue links + "What's Hot In" tab)
+   --------------------------------------------------------------------------- */
+.subnav {
+  display: flex;
+  align-items: stretch;
+  background: var(--orange);
+  padding-left: 12px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30), inset 0 -3px 5px rgba(120,60,0,0.30);
+}
+.subnav__links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex: 1;
+}
+/* Main tabs render red, matching the reference (not blue). */
+.subnav__links a { color: var(--link-red); font-weight: bold; font-size: 12px; text-shadow: 1px 1px 0 rgba(255,255,255,0.35); }
+.subnav__hot {
+  display: flex;
+  align-items: center;
+  background: var(--cream);
+  border: 1px solid var(--orange-deep);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;     /* raised folder-tab corners */
+  color: var(--link-red);
+  font-weight: bold;
+  font-size: 13px;
+  font-style: italic;
+  padding: 7px 18px;
+  align-self: flex-end;
+  width: 168px;
+  justify-content: center;
+  box-shadow: -2px -2px 4px rgba(120,60,0,0.25);
+}
+
+/* ---------------------------------------------------------------------------
+   6. PROMO ROW (freebie + careers + hot categories)
+   --------------------------------------------------------------------------- */
+.promo-row {
+  display: grid;
+  grid-template-columns: 152px 1fr 168px;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
+}
+.promo-row > * { padding: 8px; }
+
+/* "Get Linear for Free" oval + user counter. */
+.freebie { text-align: center; }
+.freebie__oval {
+  display: block;
+  margin: 0 auto 4px;
+  width: 122px; height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 28%, #B6E86A, #9BDB4E 35%, var(--green-bright-2));
+  border: 2px solid #2C6A0F;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 1.1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.35);
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.30), inset 0 4px 6px rgba(255,255,255,0.35);
+}
+.freebie__oval small { font-size: 9px; font-weight: normal; }
+.freebie__counter {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  letter-spacing: 2px;
+  background: #111; color: #FF7A00;
+  border: 1px solid #000;
+  padding: 1px 6px;
+  display: inline-block;
+}
+.freebie__caption { font-size: 9px; color: var(--ink-soft); margin-top: 2px; }
+
+/* "Linear Careers" promo. */
+.careers {
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+}
+.careers__box {
+  display: flex; align-items: center; gap: 12px;
+  border: 2px solid var(--orange); border-radius: 16px;
+  background: var(--white);
+  padding: 8px 16px;
+  box-shadow: 3px 3px 4px rgba(0,0,0,0.20);
+}
+.careers__icon { flex: 0 0 auto; width: 48px; height: 32px; }
+.careers__box p { font-size: 13px; }
+.careers__box strong { color: var(--link-orange); }
+
+/* "What's Hot In" category box. */
+.hotbox { background: var(--cream); border: 1px solid var(--orange-deep); box-shadow: 2px 2px 4px rgba(120,60,0,0.20); }
+.hotbox ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
+.hotbox li a { color: var(--link-blue); font-weight: bold; font-size: 10px; }
+
+/* ---------------------------------------------------------------------------
+   7. MAIN COLUMNS (four-column dense link board)
+   --------------------------------------------------------------------------- */
+.columns {
+  display: grid;
+  grid-template-columns: 152px 1fr 1fr 168px;
+}
+.col { padding: 0 8px 10px; }
+/* Thin vertical separators between columns. */
+.col + .col { border-left: 1px solid var(--rule); }
+
+/* Green section header bar (slight raised 3D edge). */
+.sec-head {
+  text-align: center;
+  background: linear-gradient(to bottom, #B9D634, var(--green-head));
+  border: 1px solid var(--green-head-edge);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 4px;
+  margin: 8px 0 5px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+.sec-head--orange { background: linear-gradient(to bottom, #FBB04E, var(--orange)); border-color: var(--orange-deep); color: var(--ink); }
+
+/* --- List bullet variants (matching the reference) --- */
+
+/* (a) Dense feature/link lists: small red round bullet. */
+.linklist li { padding: 1px 0 1px 9px; position: relative; font-size: 11px; }
+.linklist li::before { content: "\2022"; position: absolute; left: 0; color: var(--link-red); font-weight: bold; }
+.linklist a { color: var(--link-blue); }
+.linklist .more a { color: var(--link-blue); font-style: italic; }
+.linklist .lead { color: var(--link-red); font-weight: bold; }
+
+/* (b) Software list: small dark square bullet. */
+.dotlist li { padding: 1px 0 1px 10px; position: relative; font-size: 11px; }
+.dotlist li::before { content: "\25AA"; position: absolute; left: 0; color: #444; font-size: 9px; top: 1px; }
+.dotlist a { color: var(--link-blue); }
+.dotlist .more a { font-style: italic; }
+
+/* (c) Topic list: orange triangle arrow + bold link. */
+.arrowlist li { padding: 2px 0 2px 12px; position: relative; font-size: 11px; }
+.arrowlist li::before { content: "\25B8"; position: absolute; left: 0; color: var(--orange-deep); font-size: 10px; }
+.arrowlist a { color: var(--link-blue); font-weight: bold; }
+.arrowlist .more a { color: var(--link-red); }
+
+/* Plain (no-bullet) link lists used in the Find-Teammates column. */
+.topiclist li { padding: 1px 0; font-size: 11px; }
+.topiclist a { color: var(--link-blue); }
+
+/* "More ..." row: right-aligned, no bullet (override the list variants by specificity). */
+.linklist li.more, .dotlist li.more, .arrowlist li.more { padding-left: 0; text-align: right; }
+.linklist li.more::before, .dotlist li.more::before, .arrowlist li.more::before { content: ""; }
+.more a { font-style: italic; }
+
+/* "What's New" / "Spotlight" feature items with big red drop-cap. */
+.feature { margin-bottom: 8px; padding-left: 2px; }
+.feature__cap {
+  float: left;
+  font-size: 22px; font-weight: bold; line-height: 0.9;
+  color: var(--link-red);
+  margin: 0 3px 0 0;
+}
+.feature p { font-size: 11px; }
+.feature .hl { color: var(--link-red); font-weight: bold; }
+
+/* "What's Hot In:" inline definition list (Spotlight). */
+.hotin { font-size: 11px; margin: 4px 0 6px; }
+.hotin dt { display: inline; font-weight: bold; color: var(--link-red); }
+.hotin dd { display: inline; margin: 0; }
+.hotin .pair { display: block; padding: 1px 0; }
+
+/* Nested community sub-lists. */
+.subgroup { margin-bottom: 5px; }
+.subgroup > .lead { color: var(--link-red); font-weight: bold; display: block; }
+.subgroup ul { padding-left: 8px; }
+.subgroup li { font-size: 11px; padding: 0; }
+.subgroup .muted a { color: var(--ink-soft); }
+
+/* Newsletter sign-up. */
+.newsletter label { display: block; margin-bottom: 3px; font-weight: bold; }
+.newsletter input[type="text"] { width: 96px; font-family: inherit; font-size: 11px; padding: 1px 2px; border: 1px solid var(--bevel-dark); }
+.newsletter .opts { margin-top: 4px; }
+.newsletter .opts label { display: block; font-weight: normal; }
+
+/* Around-the-world languages two-column block. */
+.langs { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
+.langs li { padding: 1px 0; font-size: 11px; }
+
+/* ---------------------------------------------------------------------------
+   8. FIND-TEAMMATES COLUMN (search widgets)
+   --------------------------------------------------------------------------- */
+.find h4 { font-size: 11px; color: var(--link-blue); text-align: center; margin: 8px 0 3px; }
+.find .note { font-size: 9px; color: var(--ink-soft); text-align: center; }
+.find .field { margin: 2px 0; }
+.find .field label { display: block; font-size: 10px; }
+.find input[type="text"] { width: 100%; font-family: inherit; font-size: 11px; padding: 1px 3px; border: 1px solid var(--bevel-dark); }
+.find select { width: 100%; font-family: inherit; font-size: 11px; }
+.find .center { text-align: center; margin: 4px 0; }
+.find .check { font-size: 10px; }
+.find .accent { color: var(--link-red); font-weight: bold; text-align: center; }
+.find .your-addr { font-size: 10px; }
+.find .your-addr p { margin-bottom: 4px; }
+
+/* ---------------------------------------------------------------------------
+   9. SEARCH-THE-WEB BAND
+   --------------------------------------------------------------------------- */
+.search-web { border-top: 2px solid var(--orange); }
+.search-web__head {
+  background: var(--orange);
+  color: var(--link-blue);
+  font-size: 13px; font-weight: bold;
+  text-align: center;
+  padding: 3px;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.35);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30), inset 0 -3px 5px rgba(120,60,0,0.30);
+}
+.search-web__body { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; padding: 8px 12px; background: var(--orange-pale); }
+.search-web__body input { width: 180px; font-family: inherit; font-size: 12px; padding: 2px 4px; border: 1px solid var(--bevel-dark); }
+.search-web__body h4 { font-size: 11px; color: var(--link-blue); margin-bottom: 3px; }
+.search-web__body .cats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; font-size: 10px; }
+.search-web__body a { color: var(--link-blue); }
+.search-web .row { display: flex; align-items: center; gap: 8px; }
+
+/* ---------------------------------------------------------------------------
+   10. CHARGING POLICY
+   --------------------------------------------------------------------------- */
+.charging { padding: 14px 40px 16px; text-align: center; border-top: 1px solid var(--rule); }
+.charging h3 { color: var(--link-blue); font-size: 13px; margin-bottom: 4px; }
+.charging p { font-size: 11px; color: var(--ink); }
+
+/* ---------------------------------------------------------------------------
+   11. FOOTER: white link row (orange-bordered) + orange terms band.
+   --------------------------------------------------------------------------- */
+.site-footer { font-size: 10px; }
+/* White link bar, framed top and bottom by the brand orange. */
+.site-footer__links {
+  background: var(--white);
+  text-align: center;
+  padding: 8px;
+  border-top: 3px solid var(--orange);
+  border-bottom: 3px solid var(--orange);
+}
+.site-footer__links a { color: var(--link-red); font-weight: bold; }
+.site-footer__links a.alt { color: var(--link-blue); }
+/* Orange band carrying the terms notice + copyright. */
+.site-footer__legal {
+  background: var(--orange);
+  text-align: center;
+  padding: 8px 8px 14px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30);
+}
+.site-footer__terms { font-weight: bold; color: var(--ink); }
+.site-footer__terms a { color: var(--link-blue); }
+.site-footer__copy { color: var(--ink); margin-top: 2px; }

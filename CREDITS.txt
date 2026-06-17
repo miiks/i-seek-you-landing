@@ -1,0 +1,30 @@
+CREDITS
+=======
+
+This page is a non-commercial parody / educational reconstruction of an
+early-2000s web portal homepage, rebuilt with Linear-themed content. It is not
+affiliated with, endorsed by, or connected to Linear, Inc., ICQ, or any other
+company. All trademarks and brand names are the property of their respective
+owners and are used here only for parody and commentary.
+
+Artwork
+-------
+All illustrations on this page are ORIGINAL inline SVG drawings created for this
+exercise. They are dedicated to the public domain under the Creative Commons
+CC0 1.0 Universal dedication (https://creativecommons.org/publicdomain/zero/1.0/):
+
+  - Masthead flower-burst logo emblem and matching favicon
+  - The seven hero-nav product icons
+  - The "What's New" and "Spotlight" feature pictograms
+    (globe, language bubble, flower-burst, robot head, pointing hand,
+     smiley face, git-branch, rocket)
+  - The retro handshake in the "Linear Careers" banner
+  - The recreated Linear diagonal-line marks
+
+No third-party image assets are embedded. No copyrighted ICQ or Linear brand
+assets are used. Fonts are system fonts only (no web fonts).
+
+Marketing copy
+--------------
+Short Linear product taglines used in the "What is Linear?" band were supplied
+verbatim for this exercise and are reproduced as provided.

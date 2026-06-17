@@ -10,16 +10,18 @@
    1. DESIGN TOKENS (sampled from the ICQ.com 2000 reference)
    --------------------------------------------------------------------------- */
 :root {
-  /* Brand orange (mastheads, sub-nav, footer, "Search the Web" bar) */
-  --orange: #F7941D;
-  --orange-deep: #E07B12;
-  --orange-pale: #FDE9CC;
+  /* Brand orange (mastheads, sub-nav, footer, "Search the Web" bar) -- lightened. */
+  --orange: #FBA73A;
+  --orange-deep: #E68A1C;
+  --orange-pale: #FDEBD0;
 
-  /* Section-header tile colors (flat, per-column). */
-  --green-head: #A7C81C;       /* col 1 & 4 headers */
-  --green-head-edge: #7E9A12;
-  --yellow-head: #FFE12E;      /* col 2 & 3 headers */
-  --yellow-head-edge: #D9B400;
+  /* Section-header tile colors (flat, per-column, gaudy neon). */
+  --green-head: #A6E80C;       /* col 1 & 4 headers -- neon green */
+  --green-head-edge: #7EB200;
+  --yellow-head: #FBEE00;      /* col 2 headers -- neon yellow */
+  --yellow-head-edge: #D9C400;
+  --col3-orange: #F49A22;      /* col 3 headers -- garish orange */
+  --col3-orange-edge: #D9821A;
   --tan-head: #E8B45A;         /* "Around the World" */
   --green-bright: #6FB52B;     /* "Get Linear for Free" oval */
   --green-bright-2: #3F8C12;
@@ -153,20 +155,9 @@ img, svg { border: 0; vertical-align: middle; }
   position: relative;
   display: flex;
   justify-content: space-around;
-  background: var(--white);
-  border-bottom: 2px solid var(--orange);
-  padding: 0 4px 5px;
-}
-/* Orange strip across the TOP half of the icon row: the round icon badges
-   straddle this line so their upper halves are "cut" by the orange, echoing
-   the early-2000s circular icon look. */
-.icon-nav::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 21px;
+  align-items: flex-end;
   background: var(--orange);
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30);
+  padding: 10px 4px 4px;
 }
 .icon-nav a {
   position: relative;
@@ -174,21 +165,24 @@ img, svg { border: 0; vertical-align: middle; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   color: var(--ink);
   font-size: 10px;
+  font-weight: bold;
   text-align: center;
   width: 96px;
 }
 .icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
-/* The SVG is framed as a white circle badge (content-box so padding grows it). */
+/* White dome behind each icon: a masked HALF circle (rounded top, flat bottom)
+   sitting on the orange band, echoing the early-2000s circular icon look. */
 .icon-nav svg {
-  width: 22px; height: 22px;
+  width: 30px; height: 30px;
   box-sizing: content-box;
-  padding: 8px;
+  padding: 12px 7px 3px;
   background: var(--white);
-  border: 2px solid #C06A10;
-  border-radius: 50%;
+  border: 1px solid #E2E2E2;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 70% 70% 0 0;  /* dome / masked half-circle */
 }
 
 /* ---------------------------------------------------------------------------
@@ -298,25 +292,27 @@ img, svg { border: 0; vertical-align: middle; }
 /* Colorful side borders, the same hue as each column's header tiles.
    Columns 1 & 4 sit on a light "dirty yellow" wash. */
 .col1, .col4 { background: var(--dirty-yellow); }
-.col1 { border-left: 3px solid var(--green-head); border-right: 1px solid var(--rule); }
+.col1 { border-left: 3px solid var(--green-head); }
 .col2 { border-left: 3px solid var(--yellow-head); }
-.col3 { border-left: 3px solid var(--yellow-head); }
-.col4 { border-left: 3px solid var(--green-head); }
+.col3 { border-left: 3px solid var(--col3-orange); }
+.col4 { border-left: 3px solid var(--green-head); border-right: 3px solid var(--green-head); }
 
-/* Section header tile: FLAT solid color, no bevel, no shadow (per reference). */
+/* Section header tile: FLAT solid color, no bevel/shadow, and full-bleed --
+   it spans the whole column width (negative margins cancel .col padding) so
+   the tile touches the colored side border with no left/right gap. */
 .sec-head {
   text-align: center;
   color: var(--ink);
   font-size: 12px;
   font-weight: bold;
   padding: 2px 4px;
-  margin: 7px 0 4px;
+  margin: 7px -7px 4px;
 }
-/* Default green tiles (columns 1 & 4). */
+/* Per-column tile colors: green (1 & 4), neon yellow (2), garish orange (3). */
 .sec-head { background: var(--green-head); }
-/* Yellow tiles for columns 2 & 3. */
-.col2 .sec-head, .col3 .sec-head { background: var(--yellow-head); }
-.sec-head--orange { background: var(--tan-head); }
+.col2 .sec-head { background: var(--yellow-head); }
+.col3 .sec-head { background: var(--col3-orange); }
+.sec-head--orange { background: var(--col3-orange); }
 
 /* --- List bullet variants (matching the reference) --- */
 
@@ -357,13 +353,14 @@ img, svg { border: 0; vertical-align: middle; }
 .linklist li.more::before, .dotlist li.more::before, .arrowlist li.more::before { content: ""; }
 .more a { font-style: italic; }
 
-/* "What's New" / "Spotlight" feature items with big red drop-cap. */
-.feature { margin-bottom: 8px; padding-left: 2px; }
+/* "What's New" / "Spotlight" feature items: pictogram + big red drop-cap. */
+.feature { margin-bottom: 8px; overflow: hidden; }
+.feature__pic { float: left; width: 34px; height: 34px; margin: 1px 6px 2px 0; }
 .feature__cap {
   float: left;
-  font-size: 22px; font-weight: bold; line-height: 0.9;
+  font-size: 20px; font-weight: bold; line-height: 0.85;
   color: var(--link-red);
-  margin: 0 3px 0 0;
+  margin: 0 2px 0 0;
 }
 .feature p { font-size: 10px; }
 .feature .hl { color: var(--link-red); font-weight: bold; }
@@ -432,6 +429,39 @@ img, svg { border: 0; vertical-align: middle; }
 .charging { padding: 12px 40px 14px; text-align: center; border-top: 1px solid var(--rule); }
 .charging h3 { color: var(--link-blue); font-size: 12px; margin-bottom: 3px; }
 .charging p { font-size: 9px; color: var(--ink); line-height: 1.25; }
+
+/* ---------------------------------------------------------------------------
+   10b. "WHAT IS LINEAR?" MANIFESTO BAND (the verbatim product copy).
+   --------------------------------------------------------------------------- */
+.manifesto { border-top: 2px solid var(--orange); }
+.manifesto__head {
+  background: var(--green-head);
+  text-align: center;
+  font-size: 12px; font-weight: bold;
+  color: var(--ink);
+  padding: 2px 4px;
+}
+.manifesto__hero { text-align: center; padding: 12px 16px 8px; background: var(--dirty-yellow); }
+.manifesto__hero h3 { font-size: 16px; color: var(--link-blue); }
+.manifesto__hero p { font-size: 11px; color: var(--ink); margin-top: 3px; }
+.manifesto__lead {
+  text-align: center; font-size: 11px; color: var(--ink);
+  background: var(--dirty-yellow);
+  padding: 0 28px 10px;
+}
+.manifesto__grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  background: var(--dirty-yellow);
+}
+.manifesto__cell { padding: 8px 12px 10px; border-top: 1px solid var(--green-head); }
+.manifesto__cell + .manifesto__cell { border-left: 1px solid var(--green-head); }
+.manifesto__cell h4 { font-size: 11px; color: var(--link-red); margin-bottom: 3px; }
+.manifesto__cell p { font-size: 10px; color: var(--ink); line-height: 1.3; }
+.manifesto__tagline {
+  text-align: center; font-weight: bold; font-size: 12px; color: var(--link-blue);
+  background: var(--dirty-yellow);
+  padding: 4px 0 12px;
+}
 
 /* ---------------------------------------------------------------------------
    11. FOOTER: white link row (orange-bordered) + orange terms band.

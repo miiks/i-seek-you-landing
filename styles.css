@@ -10,21 +10,27 @@
    1. DESIGN TOKENS (sampled from the ICQ.com 2000 reference)
    --------------------------------------------------------------------------- */
 :root {
-  /* Brand orange (mastheads, sub-nav, footer, "Search the Web" bar) */
-  --orange: #F7941D;
-  --orange-deep: #E07B12;
-  --orange-pale: #FDE9CC;
+  /* Brand orange (mastheads, sub-nav, footer, "Search the Web" bar) -- lightened. */
+  --orange: #FBA73A;
+  --orange-deep: #E68A1C;
+  --orange-pale: #FDEBD0;
 
-  /* Lime-green section headers */
-  --green-head: #A7C81C;
-  --green-head-edge: #7E9A12;
-  --green-bright: #6FB52B;   /* "Get Linear for Free" oval */
+  /* Section-header tile colors (flat, per-column, gaudy neon). */
+  --green-head: #A6E80C;       /* col 1 & 4 headers -- neon green */
+  --green-head-edge: #7EB200;
+  --yellow-head: #FBEE00;      /* col 2 headers -- neon yellow */
+  --yellow-head-edge: #D9C400;
+  --col3-orange: #F49A22;      /* col 3 headers -- garish orange */
+  --col3-orange-edge: #D9821A;
+  --tan-head: #E8B45A;         /* "Around the World" */
+  --green-bright: #6FB52B;     /* "Get Linear for Free" oval */
   --green-bright-2: #3F8C12;
 
   /* Surfaces */
   --white: #FFFFFF;
-  --cream: #FFFFCC;          /* "What's Hot In" box, highlight panels */
-  --rule: #D9D9C0;           /* thin column separators / hairlines */
+  --cream: #FFFFCC;            /* "What's Hot In" box, highlight panels */
+  --dirty-yellow: #F7F4C8;     /* columns 1 & 4 background */
+  --rule: #D9D9C0;             /* thin hairlines */
 
   /* Text */
   --ink: #222222;
@@ -50,9 +56,14 @@ html, body { margin: 0; padding: 0; }
 body {
   background: #FFFFFF;
   color: var(--ink);
-  font-family: Verdana, Geneva, Tahoma, Arial, sans-serif;
-  font-size: 11px;
-  line-height: 1.3;
+  /* Arial renders tighter and more period-correct than Verdana for this portal. */
+  font-family: Arial, "Helvetica Neue", Helvetica, "MS Sans Serif", sans-serif;
+  font-size: 10px;
+  line-height: 1.2;
+  /* Kill anti-aliasing so small text renders crunchy/aliased like a 2000 browser. */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  text-rendering: optimizeSpeed;
 }
 h1, h2, h3, h4, p, ul, dl, dd, dt { margin: 0; padding: 0; }
 ul { list-style: none; }
@@ -110,15 +121,15 @@ img, svg { border: 0; vertical-align: middle; }
 .logo__mark { display: block; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.25)); }
 .logo__text { display: flex; flex-direction: column; line-height: 1; }
 .logo__word {
-  font-size: 30px; font-weight: bold; letter-spacing: -1px; color: #4B1E84;
+  font-size: 25px; font-weight: bold; letter-spacing: -1px; color: #4B1E84;
   /* Retro chunky drop shadow on the wordmark. */
   text-shadow: 2px 2px 0 rgba(255,255,255,0.6), 3px 3px 0 rgba(0,0,0,0.18);
 }
 .logo__word span { color: #2C7A12; }
-.logo__tag { font-size: 11px; font-style: italic; color: #4B1E84; margin-top: 2px; }
+.logo__tag { font-size: 10px; font-style: italic; color: #4B1E84; margin-top: 2px; }
 
 .masthead__search { text-align: center; flex: 1; }
-.masthead__search h2 { font-size: 15px; font-weight: bold; color: var(--ink); margin-bottom: 2px; }
+.masthead__search h2 { font-size: 13px; font-weight: bold; color: var(--ink); margin-bottom: 2px; }
 .masthead__search .row { display: inline-flex; align-items: center; gap: 6px; }
 .masthead__search input {
   width: 220px; font-family: inherit; font-size: 12px; padding: 2px 4px;
@@ -141,36 +152,38 @@ img, svg { border: 0; vertical-align: middle; }
    4. ICON NAV (white strip with 7 labeled icons)
    --------------------------------------------------------------------------- */
 .icon-nav {
+  position: relative;
   display: flex;
   justify-content: space-around;
-  background: var(--white);
-  border-top: 2px solid var(--orange);
-  border-bottom: 2px solid var(--orange);
-  padding: 6px 4px;
+  align-items: flex-end;
+  background: var(--orange);
+  padding: 10px 4px 4px;
 }
 .icon-nav a {
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   color: var(--ink);
   font-size: 10px;
+  font-weight: bold;
   text-align: center;
   width: 96px;
-  padding-top: 4px;
-}
-/* Soft "spotlight dome" arch behind each icon, echoing the reference scallops. */
-.icon-nav a::before {
-  content: "";
-  position: absolute;
-  top: -6px;
-  width: 60px; height: 34px;
-  border-radius: 0 0 60px 60px / 0 0 34px 34px;
-  background: radial-gradient(ellipse at 50% 0%, var(--orange-pale), rgba(255,255,255,0) 70%);
 }
 .icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
-.icon-nav svg { position: relative; width: 36px; height: 36px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.25)); }
+/* White dome behind each icon: a masked HALF circle (rounded top, flat bottom)
+   sitting on the orange band, echoing the early-2000s circular icon look. */
+.icon-nav svg {
+  width: 30px; height: 30px;
+  box-sizing: content-box;
+  padding: 12px 7px 3px;
+  background: var(--white);
+  border: 1px solid #E2E2E2;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 70% 70% 0 0;  /* dome / masked half-circle */
+}
 
 /* ---------------------------------------------------------------------------
    5. SUB-NAV (orange band: blue links + "What's Hot In" tab)
@@ -180,16 +193,16 @@ img, svg { border: 0; vertical-align: middle; }
   align-items: stretch;
   background: var(--orange);
   padding-left: 12px;
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.30), inset 0 -3px 5px rgba(120,60,0,0.30);
+  border-top: 1px solid var(--orange-deep);
 }
 .subnav__links {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 24px;
   flex: 1;
 }
-/* Main tabs render red, matching the reference (not blue). */
-.subnav__links a { color: var(--link-red); font-weight: bold; font-size: 12px; text-shadow: 1px 1px 0 rgba(255,255,255,0.35); }
+/* Flat orange band, blue bold links, matching the reference. */
+.subnav__links a { color: var(--link-blue); font-weight: bold; font-size: 11px; }
 .subnav__hot {
   display: flex;
   align-items: center;
@@ -260,7 +273,7 @@ img, svg { border: 0; vertical-align: middle; }
   box-shadow: 3px 3px 4px rgba(0,0,0,0.20);
 }
 .careers__icon { flex: 0 0 auto; width: 48px; height: 32px; }
-.careers__box p { font-size: 13px; }
+.careers__box p { font-size: 12px; }
 .careers__box strong { color: var(--link-orange); }
 
 /* "What's Hot In" category box. */
@@ -275,67 +288,85 @@ img, svg { border: 0; vertical-align: middle; }
   display: grid;
   grid-template-columns: 152px 1fr 1fr 168px;
 }
-.col { padding: 0 8px 10px; }
-/* Thin vertical separators between columns. */
-.col + .col { border-left: 1px solid var(--rule); }
+.col { padding: 0 7px 10px; }
+/* Colorful side borders, the same hue as each column's header tiles.
+   Columns 1 & 4 sit on a light "dirty yellow" wash. */
+.col1, .col4 { background: var(--dirty-yellow); }
+.col1 { border-left: 3px solid var(--green-head); }
+.col2 { border-left: 3px solid var(--yellow-head); }
+.col3 { border-left: 3px solid var(--col3-orange); }
+.col4 { border-left: 3px solid var(--green-head); border-right: 3px solid var(--green-head); }
 
-/* Green section header bar (slight raised 3D edge). */
+/* Section header tile: FLAT solid color, no bevel/shadow, and full-bleed --
+   it spans the whole column width (negative margins cancel .col padding) so
+   the tile touches the colored side border with no left/right gap. */
 .sec-head {
   text-align: center;
-  background: linear-gradient(to bottom, #B9D634, var(--green-head));
-  border: 1px solid var(--green-head-edge);
   color: var(--ink);
   font-size: 12px;
   font-weight: bold;
-  padding: 3px 4px;
-  margin: 8px 0 5px;
-  box-shadow: 1px 2px 3px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.5);
+  padding: 2px 4px;
+  margin: 7px -7px 4px;
 }
-.sec-head--orange { background: linear-gradient(to bottom, #FBB04E, var(--orange)); border-color: var(--orange-deep); color: var(--ink); }
+/* Per-column tile colors: green (1 & 4), neon yellow (2), garish orange (3). */
+.sec-head { background: var(--green-head); }
+.col2 .sec-head { background: var(--yellow-head); }
+.col3 .sec-head { background: var(--col3-orange); }
+.sec-head--orange { background: var(--col3-orange); }
 
 /* --- List bullet variants (matching the reference) --- */
 
 /* (a) Dense feature/link lists: small red round bullet. */
-.linklist li { padding: 1px 0 1px 9px; position: relative; font-size: 11px; }
+.linklist li { padding: 1px 0 1px 9px; position: relative; font-size: 10px; }
 .linklist li::before { content: "\2022"; position: absolute; left: 0; color: var(--link-red); font-weight: bold; }
 .linklist a { color: var(--link-blue); }
 .linklist .more a { color: var(--link-blue); font-style: italic; }
 .linklist .lead { color: var(--link-red); font-weight: bold; }
 
 /* (b) Software list: small dark square bullet. */
-.dotlist li { padding: 1px 0 1px 10px; position: relative; font-size: 11px; }
-.dotlist li::before { content: "\25AA"; position: absolute; left: 0; color: #444; font-size: 9px; top: 1px; }
+.dotlist li { padding: 1px 0 1px 10px; position: relative; font-size: 10px; }
+.dotlist li::before { content: "\25AA"; position: absolute; left: 0; color: #444; font-size: 8px; top: 1px; }
 .dotlist a { color: var(--link-blue); }
 .dotlist .more a { font-style: italic; }
 
 /* (c) Topic list: orange triangle arrow + bold link. */
-.arrowlist li { padding: 2px 0 2px 12px; position: relative; font-size: 11px; }
-.arrowlist li::before { content: "\25B8"; position: absolute; left: 0; color: var(--orange-deep); font-size: 10px; }
+.arrowlist li { padding: 2px 0 2px 12px; position: relative; font-size: 10px; }
+.arrowlist li::before { content: "\25B8"; position: absolute; left: 0; color: var(--orange-deep); font-size: 9px; }
 .arrowlist a { color: var(--link-blue); font-weight: bold; }
 .arrowlist .more a { color: var(--link-red); }
 
 /* Plain (no-bullet) link lists used in the Find-Teammates column. */
-.topiclist li { padding: 1px 0; font-size: 11px; }
+.topiclist li { padding: 1px 0; font-size: 10px; }
 .topiclist a { color: var(--link-blue); }
+
+/* --- Hybrid underlining: in 2000 some link groups shipped underlined and
+   others didn't, with no consistency. Force underlines on a few groups so the
+   page reads as chaotically as the original (others stay underline-on-hover). */
+.hotin dt a,
+.subgroup > .lead a,
+.col4 .topiclist a,
+.find h4 a,
+.community-extra a { text-decoration: underline; }
 
 /* "More ..." row: right-aligned, no bullet (override the list variants by specificity). */
 .linklist li.more, .dotlist li.more, .arrowlist li.more { padding-left: 0; text-align: right; }
 .linklist li.more::before, .dotlist li.more::before, .arrowlist li.more::before { content: ""; }
 .more a { font-style: italic; }
 
-/* "What's New" / "Spotlight" feature items with big red drop-cap. */
-.feature { margin-bottom: 8px; padding-left: 2px; }
+/* "What's New" / "Spotlight" feature items: pictogram + big red drop-cap. */
+.feature { margin-bottom: 8px; overflow: hidden; }
+.feature__pic { float: left; width: 34px; height: 34px; margin: 1px 6px 2px 0; }
 .feature__cap {
   float: left;
-  font-size: 22px; font-weight: bold; line-height: 0.9;
+  font-size: 20px; font-weight: bold; line-height: 0.85;
   color: var(--link-red);
-  margin: 0 3px 0 0;
+  margin: 0 2px 0 0;
 }
-.feature p { font-size: 11px; }
+.feature p { font-size: 10px; }
 .feature .hl { color: var(--link-red); font-weight: bold; }
 
 /* "What's Hot In:" inline definition list (Spotlight). */
-.hotin { font-size: 11px; margin: 4px 0 6px; }
+.hotin { font-size: 10px; margin: 4px 0 6px; }
 .hotin dt { display: inline; font-weight: bold; color: var(--link-red); }
 .hotin dd { display: inline; margin: 0; }
 .hotin .pair { display: block; padding: 1px 0; }
@@ -344,7 +375,7 @@ img, svg { border: 0; vertical-align: middle; }
 .subgroup { margin-bottom: 5px; }
 .subgroup > .lead { color: var(--link-red); font-weight: bold; display: block; }
 .subgroup ul { padding-left: 8px; }
-.subgroup li { font-size: 11px; padding: 0; }
+.subgroup li { font-size: 10px; padding: 0; }
 .subgroup .muted a { color: var(--ink-soft); }
 
 /* Newsletter sign-up. */
@@ -360,7 +391,7 @@ img, svg { border: 0; vertical-align: middle; }
 /* ---------------------------------------------------------------------------
    8. FIND-TEAMMATES COLUMN (search widgets)
    --------------------------------------------------------------------------- */
-.find h4 { font-size: 11px; color: var(--link-blue); text-align: center; margin: 8px 0 3px; }
+.find h4 { font-size: 11px; color: var(--link-blue); text-align: center; margin: 8px 0 3px; text-decoration: underline; }
 .find .note { font-size: 9px; color: var(--ink-soft); text-align: center; }
 .find .field { margin: 2px 0; }
 .find .field label { display: block; font-size: 10px; }
@@ -395,19 +426,52 @@ img, svg { border: 0; vertical-align: middle; }
 /* ---------------------------------------------------------------------------
    10. CHARGING POLICY
    --------------------------------------------------------------------------- */
-.charging { padding: 14px 40px 16px; text-align: center; border-top: 1px solid var(--rule); }
-.charging h3 { color: var(--link-blue); font-size: 13px; margin-bottom: 4px; }
-.charging p { font-size: 11px; color: var(--ink); }
+.charging { padding: 12px 40px 14px; text-align: center; border-top: 1px solid var(--rule); }
+.charging h3 { color: var(--link-blue); font-size: 12px; margin-bottom: 3px; }
+.charging p { font-size: 9px; color: var(--ink); line-height: 1.25; }
+
+/* ---------------------------------------------------------------------------
+   10b. "WHAT IS LINEAR?" MANIFESTO BAND (the verbatim product copy).
+   --------------------------------------------------------------------------- */
+.manifesto { border-top: 2px solid var(--orange); }
+.manifesto__head {
+  background: var(--green-head);
+  text-align: center;
+  font-size: 12px; font-weight: bold;
+  color: var(--ink);
+  padding: 2px 4px;
+}
+.manifesto__hero { text-align: center; padding: 12px 16px 8px; background: var(--dirty-yellow); }
+.manifesto__hero h3 { font-size: 16px; color: var(--link-blue); }
+.manifesto__hero p { font-size: 11px; color: var(--ink); margin-top: 3px; }
+.manifesto__lead {
+  text-align: center; font-size: 11px; color: var(--ink);
+  background: var(--dirty-yellow);
+  padding: 0 28px 10px;
+}
+.manifesto__grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  background: var(--dirty-yellow);
+}
+.manifesto__cell { padding: 8px 12px 10px; border-top: 1px solid var(--green-head); }
+.manifesto__cell + .manifesto__cell { border-left: 1px solid var(--green-head); }
+.manifesto__cell h4 { font-size: 11px; color: var(--link-red); margin-bottom: 3px; }
+.manifesto__cell p { font-size: 10px; color: var(--ink); line-height: 1.3; }
+.manifesto__tagline {
+  text-align: center; font-weight: bold; font-size: 12px; color: var(--link-blue);
+  background: var(--dirty-yellow);
+  padding: 4px 0 12px;
+}
 
 /* ---------------------------------------------------------------------------
    11. FOOTER: white link row (orange-bordered) + orange terms band.
    --------------------------------------------------------------------------- */
-.site-footer { font-size: 10px; }
+.site-footer { font-size: 9px; }
 /* White link bar, framed top and bottom by the brand orange. */
 .site-footer__links {
   background: var(--white);
   text-align: center;
-  padding: 8px;
+  padding: 6px;
   border-top: 3px solid var(--orange);
   border-bottom: 3px solid var(--orange);
 }

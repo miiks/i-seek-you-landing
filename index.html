@@ -23,7 +23,8 @@
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="disclaimer" content="Parody / educational reconstruction. Non-commercial design exercise. Not affiliated with or endorsed by Linear, Inc. or ICQ. All trademarks belong to their respective owners; used for parody and commentary only.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%235E2C8C'/%3E%3Cpath d='M3 10 L10 3 M5 12 L12 5 M7 13 L13 7' stroke='white' stroke-width='1.3'/%3E%3C/svg%3E">
+  <!-- Favicon: the same flower-burst emblem as the masthead logo (original artwork). -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg transform='translate(8 8)'%3E%3Cg fill='%235E2C8C'%3E%3Cellipse rx='2' ry='4.6'/%3E%3Cellipse rx='2' ry='4.6' transform='rotate(60)'/%3E%3Cellipse rx='2' ry='4.6' transform='rotate(120)'/%3E%3C/g%3E%3Cg fill='%2376C043'%3E%3Cellipse rx='2' ry='4.6' transform='rotate(30)'/%3E%3Cellipse rx='2' ry='4.6' transform='rotate(150)'/%3E%3C/g%3E%3Cellipse rx='2' ry='4.6' transform='rotate(90)' fill='%23F7941D'/%3E%3Ccircle r='2.1' fill='%23FFD14D'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -35,26 +36,25 @@
          =================================================================== -->
     <header class="masthead">
       <a class="logo" href="#" aria-label="Linear.com home">
-        <!-- Retro emblem: a glossy beveled "planet" orbited by little teammates,
-             carrying the recreated Linear diagonal-line mark. Distinctive and
-             period-plausible; not an official Linear brand asset. -->
-        <svg class="logo__mark" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
-          <defs>
-            <radialGradient id="globe" cx="38%" cy="30%" r="75%">
-              <stop offset="0%" stop-color="#9C6FD0"/>
-              <stop offset="55%" stop-color="#6A33A0"/>
-              <stop offset="100%" stop-color="#3F1A6E"/>
-            </radialGradient>
-          </defs>
-          <circle cx="24" cy="24" r="16" fill="url(#globe)" stroke="#2C1150" stroke-width="1.5"/>
-          <!-- gloss highlight -->
-          <ellipse cx="18" cy="15" rx="8" ry="4.5" fill="#FFFFFF" opacity="0.35"/>
-          <!-- recreated Linear lines -->
-          <path d="M15 30 L30 15 M18 33 L33 18 M22 34 L34 22" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-          <!-- orbiting teammates -->
-          <circle cx="42" cy="14" r="3.2" fill="#8FC13E" stroke="#2C1150" stroke-width="1"/>
-          <circle cx="6" cy="32" r="3.2" fill="#F7941D" stroke="#2C1150" stroke-width="1"/>
-          <circle cx="40" cy="38" r="2.6" fill="#2E6FC0" stroke="#2C1150" stroke-width="1"/>
+        <!-- Flower-burst emblem: an original multi-petal mark in the spirit of an
+             early-2000s portal flower logo (its own petal count and colors --
+             purple/green/orange around a gold center). Not a copy of any brand. -->
+        <svg class="logo__mark" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+          <g transform="translate(22 22)">
+            <g stroke="#2C1150" stroke-width="0.8">
+              <g fill="#5E2C8C">
+                <ellipse rx="5" ry="11"/>
+                <ellipse rx="5" ry="11" transform="rotate(60)"/>
+                <ellipse rx="5" ry="11" transform="rotate(120)"/>
+              </g>
+              <g fill="#76C043">
+                <ellipse rx="5" ry="11" transform="rotate(30)"/>
+                <ellipse rx="5" ry="11" transform="rotate(150)"/>
+              </g>
+              <ellipse rx="5" ry="11" transform="rotate(90)" fill="#F7941D"/>
+            </g>
+            <circle r="5.4" fill="#FFD14D" stroke="#C98A12" stroke-width="1"/>
+          </g>
         </svg>
         <span class="logo__text">
           <span class="logo__word">Linear<span>.com</span></span>
@@ -254,11 +254,28 @@
       <!-- COLUMN 2 -->
       <div class="col col2">
         <h3 class="sec-head">What's New</h3>
-        <div class="feature"><span class="feature__cap">P</span><p><span class="hl">Promote your roadmap across the org!</span> Check out the Linear Project Updates Center.</p></div>
-        <div class="feature"><span class="feature__cap">U</span><p><span class="hl">Using Linear? Try it in your own language!</span> Now available: <a href="#">Turkish</a>, <a href="#">Russian</a>, <a href="#">Portuguese</a>, Spanish, German, French, Italian and Japanese.</p></div>
-        <div class="feature"><span class="feature__cap">G</span><p><span class="hl">Get the new and improved Linear!</span> Your favorite issue tracker now drafts specs and works behind a firewall!</p></div>
-        <div class="feature"><span class="feature__cap">N</span><p><span class="hl">New - Linear Agents!</span> Delegate work to autonomous teammates that draft your spec and push the pull request while you sleep!</p></div>
-        <div class="feature"><span class="feature__cap">H</span><p><span class="hl">Have a backlog but don't know where to start?</span> Planning a cycle? Triaging customer requests? Linear will help you decide!</p></div>
+        <!-- Feature pictograms are original inline SVG artwork (CC0 / public domain),
+             period-flavoured clip-art; see CREDITS.txt. -->
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="14" cy="17" r="11" fill="#2E8BDA" stroke="#16518C" stroke-width="1.5"/><path d="M3 17h22M14 6a17 17 0 0 1 0 22M14 6a17 17 0 0 0 0 22" fill="none" stroke="#CFE6FB" stroke-width="1"/><path d="M22 6l9 2-3 8z" fill="#76C043" stroke="#3F7A1B" stroke-width="1"/></svg></span>
+          <span class="feature__cap">P</span><p><span class="hl">Promote your roadmap across the org!</span> Check out the Linear Project Updates Center.</p>
+        </div>
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M3 5h28v17H13l-7 6v-6H3z" fill="#FFD14D" stroke="#C98A12" stroke-width="1.5" stroke-linejoin="round"/><rect x="6" y="9" width="22" height="3" fill="#CC0000"/><rect x="6" y="14" width="15" height="3" fill="#2E8BDA"/></svg></span>
+          <span class="feature__cap">U</span><p><span class="hl">Using Linear? Try it in your own language!</span> Now available: <a href="#">Turkish</a>, <a href="#">Russian</a>, <a href="#">Portuguese</a>, Spanish, German, French, Italian and Japanese.</p>
+        </div>
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><g transform="translate(17 17)"><g fill="#76C043" stroke="#3F7A1B" stroke-width="0.8"><ellipse rx="4" ry="9"/><ellipse rx="4" ry="9" transform="rotate(45)"/><ellipse rx="4" ry="9" transform="rotate(90)"/><ellipse rx="4" ry="9" transform="rotate(135)"/></g><circle r="4" fill="#FFD14D" stroke="#C98A12"/></g></svg></span>
+          <span class="feature__cap">G</span><p><span class="hl">Get the new and improved Linear!</span> Your favorite issue tracker now drafts specs and works behind a firewall!</p>
+        </div>
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><line x1="17" y1="2" x2="17" y2="7" stroke="#666" stroke-width="1.5"/><circle cx="17" cy="5" r="2" fill="#CC0000"/><rect x="5" y="8" width="24" height="19" rx="3" fill="#B9C2CC" stroke="#5A6470" stroke-width="1.5"/><circle cx="12" cy="16" r="3" fill="#2E8BDA"/><circle cx="22" cy="16" r="3" fill="#2E8BDA"/><rect x="11" y="22" width="12" height="2" fill="#5A6470"/></svg></span>
+          <span class="feature__cap">N</span><p><span class="hl">New - Linear Agents!</span> Delegate work to autonomous teammates that draft your spec and push the pull request while you sleep!</p>
+        </div>
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M3 15h12v-3q0-2 3-2h9q3 0 3 3v8q0 4-4 4H11q-8 0-8-6z" fill="#F2C28B" stroke="#A9794B" stroke-width="1.3" stroke-linejoin="round"/><line x1="20" y1="16" x2="28" y2="16" stroke="#A9794B" stroke-width="1"/></svg></span>
+          <span class="feature__cap">H</span><p><span class="hl">Have a backlog but don't know where to start?</span> Planning a cycle? Triaging customer requests? Linear will help you decide!</p>
+        </div>
         <ul class="linklist"><li class="more"><a href="#">More ...</a></li></ul>
 
         <h3 class="sec-head">Fun On Linear</h3>
@@ -324,9 +341,18 @@
       <!-- COLUMN 3 -->
       <div class="col col3">
         <h3 class="sec-head">Spotlight</h3>
-        <div class="feature"><span class="feature__cap">A</span><p><span class="hl">Autonomous Agents Special!</span> Get the agent, assign issues, meet teams and learn how to delegate.</p></div>
-        <div class="feature"><span class="feature__cap">G</span><p><span class="hl">GitHub and GitLab!</span> Open pull requests, watch diffs and review with Linear teams.</p></div>
-        <div class="feature"><span class="feature__cap">S</span><p><span class="hl">Speed up your planning!</span> Send your team a Linear Project Update!</p></div>
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="13" fill="#FFD14D" stroke="#C98A12" stroke-width="1.5"/><circle cx="12" cy="14" r="2" fill="#333"/><circle cx="22" cy="14" r="2" fill="#333"/><path d="M11 21q6 5 12 0" fill="none" stroke="#333" stroke-width="1.5"/></svg></span>
+          <span class="feature__cap">A</span><p><span class="hl">Autonomous Agents Special!</span> Get the agent, assign issues, meet teams and learn how to delegate.</p>
+        </div>
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><g stroke="#5E2C8C" stroke-width="2.5" fill="none"><line x1="9" y1="6" x2="9" y2="28"/><path d="M9 12q0 6 12 6"/></g><circle cx="9" cy="6" r="3.5" fill="#76C043" stroke="#3F7A1B" stroke-width="1.5"/><circle cx="9" cy="28" r="3.5" fill="#76C043" stroke="#3F7A1B" stroke-width="1.5"/><circle cx="24" cy="18" r="3.5" fill="#F7941D" stroke="#C98A12" stroke-width="1.5"/></svg></span>
+          <span class="feature__cap">G</span><p><span class="hl">GitHub and GitLab!</span> Open pull requests, watch diffs and review with Linear teams.</p>
+        </div>
+        <div class="feature">
+          <span class="feature__pic"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 3c5 4 7 10 7 16l-3 4h-8l-3-4c0-6 2-12 7-16z" fill="#D9DEE3" stroke="#5A6470" stroke-width="1.3"/><circle cx="17" cy="14" r="3" fill="#2E8BDA" stroke="#16518C" stroke-width="1"/><path d="M13 26l-3 5 4-2zM21 26l3 5-4-2z" fill="#CC0000"/><path d="M14 27h6l-2 4h-2z" fill="#F7941D"/></svg></span>
+          <span class="feature__cap">S</span><p><span class="hl">Speed up your planning!</span> Send your team a Linear Project Update!</p>
+        </div>
 
         <p><strong>What's Hot In:</strong></p>
         <dl class="hotin">
@@ -493,6 +519,33 @@
         </div>
       </div>
     </main>
+
+    <!-- ===================================================================
+         "WHAT IS LINEAR?" manifesto band (verbatim product copy).
+         =================================================================== -->
+    <section class="manifesto" aria-label="What is Linear?">
+      <h2 class="manifesto__head">What is Linear?</h2>
+      <div class="manifesto__hero">
+        <h3>The product development system for teams and agents</h3>
+        <p>Purpose-built for planning and building products. Designed for the AI era.</p>
+      </div>
+      <p class="manifesto__lead">A new species of product tool. Purpose-built for modern teams with AI workflows at its core, Linear sets a new standard for planning and building products.</p>
+      <div class="manifesto__grid">
+        <div class="manifesto__cell">
+          <h4>Move work forward across teams and agents</h4>
+          <p>Build and deploy AI agents that work alongside your team. Work on complex tasks together or delegate entire issues end-to-end.</p>
+        </div>
+        <div class="manifesto__cell">
+          <h4>Review PRs and agent output</h4>
+          <p>Understand code changes at a glance with structural diffs for human and agent output. Review, discuss, and merge &mdash; all within Linear.</p>
+        </div>
+        <div class="manifesto__cell">
+          <h4>Built for the future. Available today.</h4>
+          <p>The product development system for teams and agents &mdash; ready the moment you are.</p>
+        </div>
+      </div>
+      <p class="manifesto__tagline">Built for the future. Available today.</p>
+    </section>
 
     <!-- ===================================================================
          SEARCH THE WEB band.

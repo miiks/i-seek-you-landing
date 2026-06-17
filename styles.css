@@ -154,9 +154,19 @@ img, svg { border: 0; vertical-align: middle; }
   position: relative;
   display: flex;
   justify-content: space-around;
-  align-items: flex-end;
-  background: var(--orange);
-  padding: 6px 4px 0;
+  align-items: flex-start;
+  /* The defining detail: an orange band on top with a STRAIGHT bottom edge partway
+     down, white below it. Each white circle straddles that seam -- its top half
+     reads on orange, its bottom half on white (where the labels sit). A 1px shadow
+     line marks the band's bottom edge between the circles. */
+  background:
+    linear-gradient(to bottom,
+      var(--orange) 0,
+      var(--orange) 34px,
+      rgba(110,55,0,0.32) 34px,
+      rgba(110,55,0,0.32) 35px,
+      var(--white) 35px);
+  padding: 7px 4px 5px;
 }
 .icon-nav a {
   position: relative;
@@ -164,26 +174,24 @@ img, svg { border: 0; vertical-align: middle; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  color: var(--ink);
-  font-size: 10px;
+  gap: 4px;
+  color: #222;
+  font-size: 11px;
   font-weight: bold;
   text-align: center;
-  width: 96px;
-  padding-bottom: 4px;
+  width: 100px;
 }
 .icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
-/* Full white circle per icon — sits on the orange band, bottom border omitted
-   so the circle reads as resting on (not floating above) the band. */
+/* Masked white circle behind each icon: top half on orange, bottom half on white,
+   with a soft drop shadow so it reads as a raised disc. */
 .icon-nav svg {
-  width: 34px; height: 34px;
+  width: 30px; height: 30px;
   box-sizing: content-box;
-  padding: 11px;
+  padding: 9px;
   background: var(--white);
-  border: 1.5px solid #CCCCCC;
-  border-bottom: 0;
+  border: 1px solid #C4C4C4;
   border-radius: 50%;
-  box-shadow: 0 -1px 4px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 3px rgba(90,45,0,0.38);
 }
 
 /* ---------------------------------------------------------------------------

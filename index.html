@@ -24,7 +24,7 @@
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="disclaimer" content="Parody / educational reconstruction. Non-commercial design exercise. Not affiliated with or endorsed by Linear, Inc. or ICQ. All trademarks belong to their respective owners; used for parody and commentary only.">
   <!-- Favicon: same mark as the masthead logo (original artwork). -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80'%3E%3Cpath d='M38 40L4 40A34 34 0 0 1 38 74Z' fill='%23D94040'/%3E%3Cpath d='M38 40L4 40A34 34 0 1 0 38 74Z' fill='%235DC12C'/%3E%3Crect x='78' y='4' width='12' height='72' fill='%23DDB820'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 104'%3E%3Ccircle cx='52' cy='52' r='48' fill='%235DC12C'/%3E%3Cpath d='M52 52 L4 52 A48 48 0 0 0 52 100 Z' fill='%23D94040'/%3E%3Crect x='110' y='14' width='11' height='80' fill='%23DDB820'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -36,15 +36,36 @@
          =================================================================== -->
     <header class="masthead">
       <a class="logo" href="#" aria-label="Linear.com home">
-        <!-- Logo mark: original vector reconstruction (red wedge + green ¾ circle + yellow bar).
-             Black areas from the reference are omitted (treated as transparent). -->
-        <svg class="logo__mark" width="55" height="44" viewBox="0 0 100 80" aria-hidden="true">
-          <!-- Red bottom-left wedge (90° slice, clockwise from 9 o'clock to 6 o'clock) -->
-          <path d="M38 40 L4 40 A34 34 0 0 1 38 74 Z" fill="#D94040"/>
-          <!-- Green three-quarter circle (remaining 270°) -->
-          <path d="M38 40 L4 40 A34 34 0 1 0 38 74 Z" fill="#5DC12C"/>
-          <!-- Golden-yellow vertical bar -->
-          <rect x="78" y="4" width="12" height="72" fill="#DDB820"/>
+        <!-- Logo mark: original vector reconstruction. A green circle whose bottom-left
+             90° quarter is punched out and refilled with red diagonal stripes; the gaps
+             between the stripes are truly transparent (the reference's black = nothing). -->
+        <svg class="logo__mark" width="60" height="48" viewBox="0 0 128 104" aria-hidden="true">
+          <defs>
+            <!-- Bottom-left quarter wedge: center (52,52) -> left point (4,52) -> arc -> bottom point (52,100). -->
+            <clipPath id="logoWedge">
+              <path d="M52 52 L4 52 A48 48 0 0 0 52 100 Z"/>
+            </clipPath>
+            <!-- Mask: whole circle visible (white) except the wedge, which is hidden (black). -->
+            <mask id="logoCut">
+              <rect x="0" y="0" width="128" height="104" fill="#000"/>
+              <circle cx="52" cy="52" r="48" fill="#fff"/>
+              <path d="M52 52 L4 52 A48 48 0 0 0 52 100 Z" fill="#000"/>
+            </mask>
+          </defs>
+          <!-- Green circle with the bottom-left quarter masked away. -->
+          <circle cx="52" cy="52" r="48" fill="#5DC12C" mask="url(#logoCut)"/>
+          <!-- Red diagonal stripes filling the missing quarter; gaps stay transparent. -->
+          <g clip-path="url(#logoWedge)" stroke="#D94040" stroke-width="7">
+            <line x1="-10" y1="2" x2="110" y2="122"/>
+            <line x1="-10" y1="14" x2="110" y2="134"/>
+            <line x1="-10" y1="26" x2="110" y2="146"/>
+            <line x1="-10" y1="38" x2="110" y2="158"/>
+            <line x1="-10" y1="50" x2="110" y2="170"/>
+            <line x1="-10" y1="62" x2="110" y2="182"/>
+            <line x1="-10" y1="74" x2="110" y2="194"/>
+          </g>
+          <!-- Golden-yellow vertical bar. -->
+          <rect x="110" y="14" width="11" height="80" fill="#DDB820"/>
         </svg>
         <span class="logo__text">
           <span class="logo__word">Linear<span>.com</span></span>

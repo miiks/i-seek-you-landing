@@ -23,8 +23,8 @@
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="disclaimer" content="Parody / educational reconstruction. Non-commercial design exercise. Not affiliated with or endorsed by Linear, Inc. or ICQ. All trademarks belong to their respective owners; used for parody and commentary only.">
-  <!-- Favicon: the same flower-burst emblem as the masthead logo (original artwork). -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg transform='translate(8 8)'%3E%3Cg fill='%235E2C8C'%3E%3Cellipse rx='2' ry='4.6'/%3E%3Cellipse rx='2' ry='4.6' transform='rotate(60)'/%3E%3Cellipse rx='2' ry='4.6' transform='rotate(120)'/%3E%3C/g%3E%3Cg fill='%2376C043'%3E%3Cellipse rx='2' ry='4.6' transform='rotate(30)'/%3E%3Cellipse rx='2' ry='4.6' transform='rotate(150)'/%3E%3C/g%3E%3Cellipse rx='2' ry='4.6' transform='rotate(90)' fill='%23F7941D'/%3E%3Ccircle r='2.1' fill='%23FFD14D'/%3E%3C/g%3E%3C/svg%3E">
+  <!-- Favicon: same mark as the masthead logo (original artwork). -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80'%3E%3Cpath d='M38 40L4 40A34 34 0 0 1 38 74Z' fill='%23D94040'/%3E%3Cpath d='M38 40L4 40A34 34 0 1 0 38 74Z' fill='%235DC12C'/%3E%3Crect x='78' y='4' width='12' height='72' fill='%23DDB820'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
@@ -36,25 +36,15 @@
          =================================================================== -->
     <header class="masthead">
       <a class="logo" href="#" aria-label="Linear.com home">
-        <!-- Flower-burst emblem: an original multi-petal mark in the spirit of an
-             early-2000s portal flower logo (its own petal count and colors --
-             purple/green/orange around a gold center). Not a copy of any brand. -->
-        <svg class="logo__mark" width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
-          <g transform="translate(22 22)">
-            <g stroke="#2C1150" stroke-width="0.8">
-              <g fill="#5E2C8C">
-                <ellipse rx="5" ry="11"/>
-                <ellipse rx="5" ry="11" transform="rotate(60)"/>
-                <ellipse rx="5" ry="11" transform="rotate(120)"/>
-              </g>
-              <g fill="#76C043">
-                <ellipse rx="5" ry="11" transform="rotate(30)"/>
-                <ellipse rx="5" ry="11" transform="rotate(150)"/>
-              </g>
-              <ellipse rx="5" ry="11" transform="rotate(90)" fill="#F7941D"/>
-            </g>
-            <circle r="5.4" fill="#FFD14D" stroke="#C98A12" stroke-width="1"/>
-          </g>
+        <!-- Logo mark: original vector reconstruction (red wedge + green ¾ circle + yellow bar).
+             Black areas from the reference are omitted (treated as transparent). -->
+        <svg class="logo__mark" width="55" height="44" viewBox="0 0 100 80" aria-hidden="true">
+          <!-- Red bottom-left wedge (90° slice, clockwise from 9 o'clock to 6 o'clock) -->
+          <path d="M38 40 L4 40 A34 34 0 0 1 38 74 Z" fill="#D94040"/>
+          <!-- Green three-quarter circle (remaining 270°) -->
+          <path d="M38 40 L4 40 A34 34 0 1 0 38 74 Z" fill="#5DC12C"/>
+          <!-- Golden-yellow vertical bar -->
+          <rect x="78" y="4" width="12" height="72" fill="#DDB820"/>
         </svg>
         <span class="logo__text">
           <span class="logo__word">Linear<span>.com</span></span>

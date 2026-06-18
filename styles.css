@@ -121,12 +121,11 @@ img, svg { border: 0; vertical-align: middle; }
 .logo__mark { display: block; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.25)); }
 .logo__text { display: flex; flex-direction: column; line-height: 1; }
 .logo__word {
-  font-size: 25px; font-weight: bold; letter-spacing: -1px; color: #4B1E84;
-  /* Retro chunky drop shadow on the wordmark. */
-  text-shadow: 2px 2px 0 rgba(255,255,255,0.6), 3px 3px 0 rgba(0,0,0,0.18);
+  font-size: 25px; font-weight: bold; letter-spacing: -1px; color: #E05000;
+  text-shadow: 2px 2px 0 rgba(255,255,255,0.5), 3px 3px 0 rgba(0,0,0,0.18);
 }
 .logo__word span { color: #2C7A12; }
-.logo__tag { font-size: 10px; font-style: italic; color: #4B1E84; margin-top: 2px; }
+.logo__tag { font-size: 10px; font-style: italic; color: #7A3A00; margin-top: 2px; }
 
 .masthead__search { text-align: center; flex: 1; }
 .masthead__search h2 { font-size: 13px; font-weight: bold; color: var(--ink); margin-bottom: 2px; }
@@ -155,9 +154,19 @@ img, svg { border: 0; vertical-align: middle; }
   position: relative;
   display: flex;
   justify-content: space-around;
-  align-items: flex-end;
-  background: var(--orange);
-  padding: 10px 4px 4px;
+  align-items: flex-start;
+  /* The defining detail: an orange band on top with a STRAIGHT bottom edge partway
+     down, white below it. Each white circle straddles that seam -- its top half
+     reads on orange, its bottom half on white (where the labels sit). A 1px shadow
+     line marks the band's bottom edge between the circles. */
+  background:
+    linear-gradient(to bottom,
+      var(--orange) 0,
+      var(--orange) 34px,
+      rgba(110,55,0,0.32) 34px,
+      rgba(110,55,0,0.32) 35px,
+      var(--white) 35px);
+  padding: 7px 4px 5px;
 }
 .icon-nav a {
   position: relative;
@@ -165,35 +174,35 @@ img, svg { border: 0; vertical-align: middle; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  color: var(--ink);
-  font-size: 10px;
+  gap: 4px;
+  color: #222;
+  font-size: 11px;
   font-weight: bold;
   text-align: center;
-  width: 96px;
+  width: 100px;
 }
 .icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
-/* White dome behind each icon: a masked HALF circle (rounded top, flat bottom)
-   sitting on the orange band, echoing the early-2000s circular icon look. */
+/* Masked white circle behind each icon: top half on orange, bottom half on white,
+   with a soft drop shadow so it reads as a raised disc. */
 .icon-nav svg {
   width: 30px; height: 30px;
   box-sizing: content-box;
-  padding: 12px 7px 3px;
+  padding: 9px;
   background: var(--white);
-  border: 1px solid #E2E2E2;
-  border-bottom: 0;
-  border-radius: 50% 50% 0 0 / 70% 70% 0 0;  /* dome / masked half-circle */
+  border: 1px solid #C4C4C4;
+  border-radius: 50%;
+  box-shadow: 0 2px 3px rgba(90,45,0,0.38);
 }
 
 /* ---------------------------------------------------------------------------
-   5. SUB-NAV (orange band: blue links + "What's Hot In" tab)
+   5. SUB-NAV (yellow band: blue bold links + "What's Hot In" raised tab)
    --------------------------------------------------------------------------- */
 .subnav {
   display: flex;
   align-items: stretch;
-  background: var(--orange);
+  background: var(--yellow-head);
   padding-left: 12px;
-  border-top: 1px solid var(--orange-deep);
+  border-top: 2px solid var(--orange-deep);
 }
 .subnav__links {
   display: flex;
@@ -201,15 +210,14 @@ img, svg { border: 0; vertical-align: middle; }
   gap: 24px;
   flex: 1;
 }
-/* Flat orange band, blue bold links, matching the reference. */
 .subnav__links a { color: var(--link-blue); font-weight: bold; font-size: 11px; }
 .subnav__hot {
   display: flex;
   align-items: center;
-  background: var(--cream);
+  background: var(--col3-orange);
   border: 1px solid var(--orange-deep);
   border-bottom: 0;
-  border-radius: 8px 8px 0 0;     /* raised folder-tab corners */
+  border-radius: 6px 6px 0 0;
   color: var(--link-red);
   font-weight: bold;
   font-size: 13px;
@@ -218,7 +226,7 @@ img, svg { border: 0; vertical-align: middle; }
   align-self: flex-end;
   width: 168px;
   justify-content: center;
-  box-shadow: -2px -2px 4px rgba(120,60,0,0.25);
+  box-shadow: -2px -2px 3px rgba(120,60,0,0.20);
 }
 
 /* ---------------------------------------------------------------------------

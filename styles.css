@@ -114,8 +114,11 @@ img, svg { border: 0; vertical-align: middle; }
   gap: 16px;
   background: var(--orange);
   padding: 6px 10px;
-  /* Period bevel: light top edge, darker bottom edge on the orange band. */
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.35), inset 0 -3px 5px rgba(120,60,0,0.30);
+  /* Period bevel: light top edge, darker bottom edge; plus a soft outer drop
+     shadow so the masthead reads as a separate hero area above the icon nav. */
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.35), inset 0 -3px 5px rgba(120,60,0,0.30), 0 3px 4px rgba(90,45,0,0.30);
+  position: relative;
+  z-index: 2;
 }
 .logo { display: flex; align-items: center; gap: 8px; }
 .logo__mark { display: block; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.25)); }
@@ -167,6 +170,9 @@ img, svg { border: 0; vertical-align: middle; }
       rgba(110,55,0,0.32) 35px,
       var(--white) 35px);
   padding: 7px 4px 5px;
+  /* Small gap above the band so the two hero areas read as separate, with the
+     masthead's drop shadow falling into it (matches the reference). */
+  margin-top: 4px;
 }
 .icon-nav a {
   position: relative;
@@ -182,17 +188,17 @@ img, svg { border: 0; vertical-align: middle; }
   width: 100px;
 }
 .icon-nav a:hover { text-decoration: none; color: var(--link-blue); }
-/* Masked white circle behind each icon: top half on orange, bottom half on white,
-   with a soft drop shadow so it reads as a raised disc. */
+/* White disc that straddles the orange/white seam. The TOP arc (over orange)
+   carries a soft inner shadow so the disc reads as cut/recessed into the band;
+   the bottom arc sits on the white page background with no border or shadow, so
+   it blends away (plain white on plain white) exactly like the reference. */
 .icon-nav svg {
   width: 30px; height: 30px;
   box-sizing: content-box;
   padding: 9px;
   background: var(--white);
   border-radius: 50%;
-  /* Clean white disc: no outer ring/hard shadow (those read as wrong vs the
-     reference). A faint inset bottom shadow gives the subtle raised treatment. */
-  box-shadow: inset 0 -2px 3px rgba(90,45,0,0.16);
+  box-shadow: inset 0 3px 4px rgba(120,60,0,0.22);
   /* Icons are 16x16 pixel-art sprites: render the upscaled pixels hard-edged
      (no anti-aliasing), matching the page's retro-aliased text. */
   shape-rendering: crispEdges;
@@ -220,21 +226,21 @@ img, svg { border: 0; vertical-align: middle; }
 .subnav__hot {
   display: flex;
   align-items: center;
-  background: var(--col3-orange);
-  border: 1px solid var(--orange-deep);
+  /* Gold folder-tab with a stepped top-left corner (yellow shows through),
+     squared, with upright bold brick-red text -- matching the reference. */
+  background: #E4B24A;
+  border: 1px solid #C7922E;
   border-bottom: 0;
-  border-radius: 6px 6px 0 0;
-  color: var(--link-red);
+  color: #A8331A;
   font-weight: bold;
   font-size: 13px;
-  font-style: italic;
   padding: 0 18px;
+  clip-path: polygon(0 14px, 18px 14px, 18px 0, 100% 0, 100% 100%, 0 100%);
   /* Top edge flush with the yellow bar; tab fills the bar height and flows
      straight into the cream .hotbox directly beneath it (same 168px width). */
   align-self: stretch;
   width: 168px;
   justify-content: center;
-  box-shadow: -2px 0 3px rgba(120,60,0,0.18);
 }
 
 /* ---------------------------------------------------------------------------
@@ -288,12 +294,12 @@ img, svg { border: 0; vertical-align: middle; }
   padding: 8px 16px;
   box-shadow: 3px 3px 4px rgba(0,0,0,0.20);
 }
-.careers__icon { flex: 0 0 auto; width: 48px; height: 32px; shape-rendering: crispEdges; }
+.careers__icon { flex: 0 0 auto; width: 44px; height: 44px; shape-rendering: crispEdges; }
 .careers__box p { font-size: 12px; }
 .careers__box strong { color: var(--link-orange); }
 
 /* "What's Hot In" category box. */
-.hotbox { background: var(--cream); border: 1px solid var(--orange-deep); box-shadow: 2px 2px 4px rgba(120,60,0,0.20); }
+.hotbox { background: var(--cream); border: 1px solid #C7922E; box-shadow: 2px 2px 4px rgba(120,60,0,0.20); }
 .hotbox ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
 .hotbox li a { color: #2C7A12; font-weight: bold; font-size: 10px; }
 

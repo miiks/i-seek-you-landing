@@ -192,6 +192,9 @@ img, svg { border: 0; vertical-align: middle; }
   border: 1px solid #C4C4C4;
   border-radius: 50%;
   box-shadow: 0 2px 3px rgba(90,45,0,0.38);
+  /* Icons are 16x16 pixel-art sprites: render the upscaled pixels hard-edged
+     (no anti-aliasing), matching the page's retro-aliased text. */
+  shape-rendering: crispEdges;
 }
 
 /* ---------------------------------------------------------------------------

@@ -13,8 +13,8 @@ All illustrations on this page are ORIGINAL inline SVG drawings created for this
 exercise. They are dedicated to the public domain under the Creative Commons
 CC0 1.0 Universal dedication (https://creativecommons.org/publicdomain/zero/1.0/):
 
-  - Masthead flower-burst logo emblem and matching favicon
-  - The seven hero-nav product icons
+  - Masthead logo emblem (green disc + red striped quarter + bar) and matching favicon
+  - The seven hero-nav product icons (16x16 pixel-art sprites)
   - The "What's New" and "Spotlight" feature pictograms
     (globe, language bubble, flower-burst, robot head, pointing hand,
      smiley face, git-branch, rocket)

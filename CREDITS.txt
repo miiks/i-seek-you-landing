@@ -18,7 +18,7 @@ CC0 1.0 Universal dedication (https://creativecommons.org/publicdomain/zero/1.0/
   - The "What's New" and "Spotlight" feature pictograms (16x16 pixel-art SVG:
     globe, language bubble, flower-burst, robot head, pointing hand,
     smiley face, git-branch, rocket)
-  - The retro handshake in the "Linear Careers" banner (pixel-art SVG)
+  - The retro handshake in the "Linear Careers" banner (24x24 pixel-art SVG)
   - The recreated Linear diagonal-line marks
 
 No third-party image assets are embedded. No copyrighted ICQ or Linear brand
